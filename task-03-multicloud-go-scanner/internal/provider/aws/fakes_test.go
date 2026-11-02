@@ -20,6 +20,11 @@ import (
 // variables are cleared, shared config files point nowhere, and the
 // instance metadata service is disabled. The tests use fakes only.
 func TestMain(m *testing.M) {
+	// When started as a fake credential_process (credprocess_test.go), act
+	// as the helper and never run the tests.
+	if mode := os.Getenv(helperModeEnv); mode != "" {
+		os.Exit(runCredentialHelper(mode))
+	}
 	for _, k := range []string{
 		"AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN",
 		"AWS_PROFILE", "AWS_DEFAULT_PROFILE", "AWS_ROLE_ARN", "AWS_WEB_IDENTITY_TOKEN_FILE",

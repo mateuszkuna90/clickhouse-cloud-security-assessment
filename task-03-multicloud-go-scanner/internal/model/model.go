@@ -54,6 +54,9 @@ const (
 	// CodeResourceIDMissing: the API returned a resource without its ID.
 	// Its rules are still evaluated; findings carry an empty ID.
 	CodeResourceIDMissing = "resource_id_missing"
+	// CodePropertiesMissing: the API returned a resource or rule without
+	// its properties object, so its rules could not be read.
+	CodePropertiesMissing = "properties_missing"
 )
 
 // Diagnostic effects.

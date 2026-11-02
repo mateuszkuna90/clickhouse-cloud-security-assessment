@@ -55,6 +55,11 @@ func LoadConfig(ctx context.Context, bootstrapRegion string) (awssdk.Config, err
 	if !ValidRegion(cfg.Region) {
 		return awssdk.Config{}, ErrInvalidBootstrapRegion
 	}
+	// credential_process: contain the helper (stderr, lifetime) or fail
+	// closed; every other credential source is left unchanged.
+	if err := containCredentialProcess(&cfg); err != nil {
+		return awssdk.Config{}, err
+	}
 	return cfg, nil
 }
 

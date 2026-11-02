@@ -35,11 +35,11 @@ var (
 	// ErrCredentials means Application Default Credentials could not be
 	// found or loaded.
 	ErrCredentials = errors.New(
-		"Google Application Default Credentials could not be loaded: " +
+		"could not load Google Application Default Credentials: " +
 			"check GOOGLE_APPLICATION_CREDENTIALS, run 'gcloud auth application-default login', " +
 			"or use an attached service account / workload identity")
 	// ErrClientInit means the Compute API client could not be created.
-	ErrClientInit = errors.New("Compute Engine API client could not be created")
+	ErrClientInit = errors.New("could not create the Compute Engine API client")
 )
 
 // Client is the SDK adapter. It is safe for concurrent use.

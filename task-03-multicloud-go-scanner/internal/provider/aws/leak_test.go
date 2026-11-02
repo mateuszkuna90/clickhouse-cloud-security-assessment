@@ -15,6 +15,7 @@ import (
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	awssdk "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go"
@@ -93,7 +94,14 @@ func captureOutput(t *testing.T, fn func()) string {
 	fn()
 
 	w.Close()
-	<-done
+	// Bounded: a child process that outlived fn and still holds the pipe
+	// fails the test instead of hanging it.
+	select {
+	case <-done:
+	case <-time.After(captureDrainTimeout):
+		t.Errorf("captured stdout/stderr still open %v after the run: a child process outlived it", captureDrainTimeout)
+		return logBuf.String()
+	}
 	r.Close()
 	mu.Lock()
 	defer mu.Unlock()

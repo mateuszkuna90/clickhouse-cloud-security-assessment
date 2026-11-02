@@ -113,6 +113,7 @@ const (
 	errNoOutput               safeError = "the API returned no output"
 	errRepeatedToken          safeError = "NextToken repeated; the listing would not end"
 	errNotStarted             safeError = "region not scanned before the run ended"
+	errEmptyCredentialProcess safeError = "credential_process is empty"
 )
 
 // pageError records which DescribeSecurityGroups page failed.

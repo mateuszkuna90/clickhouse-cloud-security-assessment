@@ -1,11 +1,12 @@
 # Task 03: Multi-Cloud Firewall Scanner — Design
 
-> **Status: design, revision 4, for review. No Go code exists yet.**
-> Nothing in this document has been built, tested or run against a cloud
-> account. Statements about tests describe **planned tests and acceptance
-> criteria**, not results. Details marked *(verify)* must be confirmed
-> against the SDK or provider documentation during implementation.
-> Section 15 maps each review finding to the change made.
+> **Status: approved design (revision 4); implemented through M5.**
+> Sections 1–15 are the design as approved, kept unchanged as the
+> reference. Where the code differs from them, **section 16** says how
+> and why; section 16 wins. Test statements in sections 1–15 describe the
+> planned tests; actual results are in the [README](README.md). Nothing
+> has been run against a real cloud account: all testing is offline.
+> Section 15 maps each design review finding to the change made.
 
 ## 1. Requirements
 
@@ -889,3 +890,105 @@ changes required).
 | # | Finding | Change | Sections |
 |---|---|---|---|
 | M7 | `SubscriptionLister` returned only `[]string` IDs, so the scanner could not apply the state policy | `ListSubscriptionIDs` replaced by `ListSubscriptions(ctx) ([]Subscription, error)`; `Subscription{ID, State, HasState}` keeps the raw API state; explicit-list entries carry `HasState: false` and are always scanned; one `shouldScan` policy skips only an API-reported `Deleted`; unknown and empty states are scanned; failure and exit-code rules listed; discovery, explicit-list and adapter tests updated | 4, 5.5, 11 |
+
+## 16. Implementation differences (M1–M5)
+
+Where the code differs from sections 1–15. Each item was made during
+implementation; items marked *(M5)* are new in this milestone and have not
+yet had an independent review.
+
+### 16.1 Command line *(M5)*
+
+| # | Design | Implementation | Why |
+|---|---|---|---|
+| 1 | No provider-selection flag named | `--providers aws,gcp,azure` is **required**; unknown or empty values exit 3 | A run never scans a cloud because ambient credentials happen to exist |
+| 2 | A listed region that is invalid fails as a scope (5.3) | Region, project and subscription **syntax** is checked at startup (exit 3). A well-formed but non-existent or inaccessible value still fails as a scope (exit 2) | Arguments are validated before any API call; malformed values never reach an SDK |
+| 3 | — | A provider flag without its provider (e.g. `--gcp-projects` with `--providers aws`) exits 3 | A typo in `--providers` cannot silently drop scopes the user listed |
+| 4 | — | `--concurrency` must be 1–64 | Bounded resource use |
+| 5 | — | `-h` / `--help` prints usage to stderr and exits 0 | Conventional; stdout stays empty |
+| 6 | `--output` checked at startup | Also requires the parent directory to exist (exit 3). If a file appears at the path during the scan, the exclusive create fails and the run exits 4 without touching it | The `O_EXCL` create stays the authoritative check |
+| 7 | `run(args, stdout, stderr, scanners)` in `cmd` | `internal/cli.Run(ctx, args, Env)`; `cmd/cloudfw-scan/main.go` only wires signals and `os.Exit`. `Env` injects stdout, stderr, environment, file operations and per-provider scanner factories | Lets tests drive the whole command with fake SDK adapters |
+| 8 | `Scanner` interface in `model` (section 4) | `runner.Scanner` in `internal/runner` | `model` stays a pure data package |
+| 9 | — | Ctrl-C / SIGTERM cancel the run context; scopes still running fail with kind `timeout`; the report is written; exit 2 | Same path as the global deadline |
+| 10 | — | One-line summary on stderr: provider statuses, counts, exit code, report path | Stdout carries only JSON |
+
+### 16.2 Startup failures *(M5)*
+
+| Failure | Result |
+|---|---|
+| AWS bootstrap region missing or invalid (5.3) | exit 3, as designed. AWS is built first so that no other provider has touched the network yet |
+| A credential chain cannot be set up (`aws.ErrConfigLoad`, e.g. an unknown `AWS_PROFILE`; GCP ADC not found; Azure `DefaultAzureCredential` cannot be created) | **Not** exit 3: that provider is `failed` with one error (`operation: init`, `kind: auth`, the provider package's fixed message); the other providers still run; exit 2 |
+| Any other construction error | provider `failed`, kind `other`, generic fixed text (the error text is not used) |
+
+Rationale: section 5.2 lists only argument and configuration problems for
+exit 3. A missing or broken credential setup is an authentication failure
+of one provider; treating it as `failed` keeps multi-provider runs useful
+and matches how a rejected credential is reported later (exit 2).
+
+### 16.3 Runner *(M5)*
+
+Providers run concurrently; `runner.Run` returns only after every scanner
+has returned. A panic in a scanner's own goroutine becomes a `failed`
+provider with a fixed message (the panic value is not reported). A panic
+inside a scanner's worker goroutines is not recoverable this way and still
+ends the process.
+
+### 16.4 Report schema additions (M3–M4)
+
+- `gcp.firewall_rules[].direction` (raw API value) (M3).
+- `context.targets` entries are prefixed `tag:` / `serviceAccount:`, or
+  `all_instances` (M3).
+- Azure `rule_ref` is the rule's ARM child path, `securityRules/<name>` or
+  `defaultSecurityRules/<name>`, so default-rule findings are marked (M4).
+- Diagnostic codes `resource_id_missing` (finding detail unknown) and
+  `properties_missing` (scope incomplete) (M3, M4).
+
+### 16.5 Collector details (M2–M4)
+
+- **GCP:** the `google.golang.org/api/compute/v1` REST client is used (it
+  sends each page request with the caller's context); `firewalls.list` is
+  not retried, so a failed page fails the project (5.7 says "GCP none").
+- **Azure:** automatic resource provider registration (a POST) is disabled;
+  a pipeline policy refuses any request that is not an HTTPS GET to the
+  Resource Manager host, so a `nextLink` to another host never receives the
+  token; SDK logging is switched off process-wide; only Azure public cloud
+  is supported. Discovery uses the per-scope timeout.
+- **Azure:** a discovered record with a missing or malformed subscription
+  ID is a `failed` scope even when its state is `Deleted`; only a valid ID
+  reported as `Deleted` is `skipped` (M4 review fix).
+- **Azure:** direction, access and subscription state are compared
+  case-insensitively; GCP direction is compared case-sensitively (6.2).
+- **All:** SDK error text never reaches the report. Messages are built from
+  fixed sentences, operation names, page numbers, HTTP status codes and
+  allowlisted error codes/reasons only (section 10).
+
+### 16.6 Not done yet (M6)
+
+`iam/*.example.*` read-only role definitions are not written. The README
+documents the permissions instead.
+
+### 16.7 AWS credential_process (final review fixes)
+
+- **Helper stderr.** The SDK's `processcreds.DefaultNewCommandBuilder`
+  connects the helper's stderr and stdin to the scanner's (pinned
+  `credentials` v1.20.13). `LoadConfig` replaces a profile's direct
+  `credential_process` provider with `processcreds.NewProviderCommand` and
+  a command builder that runs the same command line and environment with
+  stderr and stdin on the null device.
+- **Lifetime.** The SDK's `aws.CredentialsCache` refreshes under a context
+  whose cancellation is suppressed, so a cancelled scan could return while
+  the helper kept running. The contained provider uses its own cache that
+  runs the helper with the caller's context and waits for it. Cancellation
+  kills the helper's process tree (Unix process group; Windows descendant
+  walk with PID-reuse checks), and `WaitDelay` (2s) bounds the wait.
+- **Fail closed.** `credential_process` inside a `role_arn` /
+  `source_profile` chain cannot be rebuilt without re-implementing the
+  SDK chain; `LoadConfig` returns `ErrCredentialProcessChain` (AWS
+  `failed`, `init`, `auth`) without starting a helper.
+- **Not changed.** Other AWS credential sources keep the SDK cache; after a
+  cancellation their in-flight HTTP token refresh may finish in the
+  background (no process involved). Interactive helpers (MFA prompts on
+  stdin) are not supported.
+- **Pagination (doc fix).** AWS `DescribeSecurityGroups` has no page cap;
+  repeated tokens fail the region and the per-region deadline bounds the
+  listing. The 1000-page cap applies to GCP and Azure only.

@@ -246,6 +246,10 @@ func (s *Scanner) scanRegion(ctx context.Context, account, region string) region
 // last page. A token that repeats is an error rather than a silent stop
 // (the paginator's StopOnDuplicateToken would end the listing early
 // without telling the caller).
+//
+// There is no page cap (unlike the GCP and Azure collectors): a listing
+// that keeps returning new tokens is ended by the per-region deadline
+// (ScopeTimeout), which fails the scope with kind timeout.
 func listSecurityGroups(ctx context.Context, client EC2API) ([]types.SecurityGroup, error) {
 	p := ec2.NewDescribeSecurityGroupsPaginator(nonNilOutput{client},
 		&ec2.DescribeSecurityGroupsInput{MaxResults: awssdk.Int32(pageSize)})
