@@ -1,0 +1,20 @@
+# =============================================================================
+# INSECURE TEST FIXTURE: DO NOT DEPLOY.
+# Verbatim copy of the template given in the assessment brief (Task 2).
+# Kept only as the "before" state for the review and as a negative test case
+# for IaC scanners. The remediated version is ../cloudformation/secure-bucket.yaml
+# =============================================================================
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+  MyIAMUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: "UnrestrictedUser"
+      Policies:
+        - PolicyName: "FullAccess"
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action: "*"
+                Resource: "*"

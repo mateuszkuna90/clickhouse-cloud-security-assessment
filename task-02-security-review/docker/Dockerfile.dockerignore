@@ -1,0 +1,39 @@
+# Build-context exclusions for ./Dockerfile (finding D-5).
+# BuildKit picks this file up automatically because it is named
+# <Dockerfile name>.dockerignore and sits next to the Dockerfile. For the
+# legacy builder, copy it to <app-dir>/.dockerignore instead.
+
+# Version control and CI metadata
+.git
+.gitignore
+.github
+
+# Local environment and runtime secret files (e.g. runtime.env)
+**/.env
+**/.env.*
+**/*.env
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/id_rsa*
+**/id_ed25519*
+**/*credentials*
+**/.aws
+**/.ssh
+
+# Infrastructure state
+**/*.tfstate
+**/*.tfstate.*
+**/.terraform
+
+# Local Python artefacts
+**/__pycache__
+**/*.py[cod]
+**/.venv
+**/venv
+**/.pytest_cache
+
+# Build files that the runtime image does not need
+Dockerfile*
+**/*.log

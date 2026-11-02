@@ -1,0 +1,7 @@
+# Task 2 local ignore rules (in addition to the repository .gitignore).
+#
+# Runtime secret files for the container, e.g. runtime.env passed to
+# `docker run --env-file`. They must never be committed. README B.3 keeps
+# them outside the repository; this is a safety net in case one is created here.
+*.env
+!*.env.example

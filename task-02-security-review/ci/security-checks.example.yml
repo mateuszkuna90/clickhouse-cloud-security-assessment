@@ -1,0 +1,215 @@
+# =============================================================================
+# EXAMPLE ONLY: this workflow is not active in this repository.
+# To enable it, copy it to .github/workflows/ and review the pinned versions.
+#
+# Preventive CI gate for Task 2. A pull request fails if:
+#   - the remediated CloudFormation template is invalid or has policy findings
+#   - the hardened Dockerfile has lint or policy findings
+#   - ANY file of the task, fixtures included, contains a secret other than the
+#     exact known fake values from the brief (see "Secret scanning" below)
+#   - the built image has fixable HIGH/CRITICAL vulnerabilities
+# It also checks that the scanners still detect the intentionally insecure
+# fixtures in fixtures/example-insecure-* (negative tests).
+#
+# Policy scans skip fixtures/ (their policy findings are intentional).
+# Secret scans never skip any path.
+#
+# Third-party actions are pinned to full commit SHAs (resolved via the GitHub
+# API on 2026-11-02); tool versions are pinned too.
+# =============================================================================
+name: task-02-security-checks
+
+on:
+  pull_request:
+    paths:
+      - "task-02-security-review/**"
+  push:
+    branches: [main]
+    paths:
+      - "task-02-security-review/**"
+
+permissions:
+  contents: read
+
+env:
+  TASK_DIR: task-02-security-review
+  CFN_LINT_VERSION: "1.59.0"
+  CHECKOV_VERSION: "3.4.2"
+
+jobs:
+  iac-and-dockerfile:
+    name: IaC, Dockerfile and secret checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: cfn-lint (template syntax and AWS resource schema)
+        run: pipx run "cfn-lint==${CFN_LINT_VERSION}" "${TASK_DIR}/cloudformation/secure-bucket.yaml"
+
+      - name: Checkov policies (CloudFormation + Dockerfile, remediated files)
+        run: >-
+          pipx run "checkov==${CHECKOV_VERSION}"
+          --directory "${TASK_DIR}"
+          --framework cloudformation dockerfile
+          --skip-path fixtures
+          --compact
+
+      # Secret scanning: every file, fixtures included, no skipped paths.
+      # The only exception is the baseline, which lists the SHA-1 of the exact
+      # known fake value from the brief that checkov reports (CKV_SECRET_6).
+      # checkov 3.4.2 matches baseline entries by hash + check ID and ignores
+      # the file path, so tests/known-fake-secrets.sh (next step) enforces that
+      # the fake values exist only in the fixture and that the baseline holds
+      # nothing but pinned fake-value hashes.
+      - name: Checkov secrets (all files, exact-value baseline)
+        run: >-
+          pipx run "checkov==${CHECKOV_VERSION}"
+          --directory "${TASK_DIR}"
+          --framework secrets
+          --baseline "${TASK_DIR}/ci/checkov-secrets.baseline.json"
+          --compact
+
+      - name: Guard for the secret-scanning exception
+        run: bash "${TASK_DIR}/tests/known-fake-secrets.sh"
+
+      - name: Hadolint (Dockerfile best practices)
+        uses: hadolint/hadolint-action@06be81baf89a55ffd0e24b8f04a4185738dd3387 # v3.5.0
+        with:
+          dockerfile: task-02-security-review/docker/Dockerfile
+          failure-threshold: warning
+
+      # Negative tests: the insecure fixtures must still be flagged, otherwise
+      # the gate is broken. Scanner failures must never count as detection:
+      #  1. Scanners run in report-only mode (--soft-fail / --no-fail), so
+      #     findings do not change the exit code; a non-zero exit is a tool error.
+      #  2. A tool error can ALSO exit 0 (checkov 3.4.2 with --soft-fail exits 0
+      #     on a missing or unparsable file and lists it under parsing_errors),
+      #     so parsing errors are checked explicitly.
+      #  3. Detection is proven only by specific expected findings in the
+      #     JSON report, never by the exit code.
+      - name: Negative test - Checkov flags the insecure CloudFormation fixture
+        env:
+          FIXTURE: task-02-security-review/fixtures/example-insecure-cloudformation.yaml
+        run: |
+          set -euo pipefail
+          report="$(mktemp)"
+          if ! pipx run "checkov==${CHECKOV_VERSION}" --file "$FIXTURE" \
+                 --framework cloudformation --output json --soft-fail > "$report"; then
+            echo "::error::Checkov failed to run (tool error, not a finding)"
+            exit 1
+          fi
+          if ! jq -e '.summary.parsing_errors == 0' "$report" >/dev/null; then
+            echo "::error::Checkov could not parse the fixture (tool error, not a finding)"
+            exit 1
+          fi
+          # Expected findings (IDs confirmed with checkov 3.4.2):
+          #   CKV_AWS_62 on MyIAMUser: full "*-*" admin policy (CF-1)
+          #   CKV_AWS_53 on MyBucket:  public ACLs not blocked (CF-5)
+          for expected in CKV_AWS_62:MyIAMUser CKV_AWS_53:MyBucket; do
+            id="${expected%%:*}"; resource="${expected##*:}"
+            if ! jq -e --arg id "$id" --arg r ".${resource}" \
+                   'any(.results.failed_checks[]?; .check_id == $id and (.resource | endswith($r)))' \
+                   "$report" >/dev/null; then
+              echo "::error::Checkov did not report ${id} on ${resource} in the insecure fixture"
+              exit 1
+            fi
+          done
+          echo "Checkov reported CKV_AWS_62 and CKV_AWS_53 as expected."
+
+      # Without the baseline, the secrets scan must report the known fake value.
+      # This proves the exception hides only that finding and that the scanner
+      # still detects it.
+      - name: Negative test - Checkov secrets scan flags the fake secret in the Dockerfile fixture
+        env:
+          FIXTURE: task-02-security-review/fixtures/example-insecure.Dockerfile
+          # SHA-1 of the fake API_KEY value from the brief (same as the baseline entry)
+          EXPECTED_HASH: 18c0337ada5836289b2ff1dd71b2fa4f6be5037d
+        run: |
+          set -euo pipefail
+          report="$(mktemp)"
+          if ! pipx run "checkov==${CHECKOV_VERSION}" --file "$FIXTURE" \
+                 --framework secrets --output json --soft-fail > "$report"; then
+            echo "::error::Checkov failed to run (tool error, not a finding)"
+            exit 1
+          fi
+          if ! jq -e '.summary.parsing_errors == 0' "$report" >/dev/null; then
+            echo "::error::Checkov could not parse the fixture (tool error, not a finding)"
+            exit 1
+          fi
+          if ! jq -e --arg h "$EXPECTED_HASH" \
+                 'any(.results.failed_checks[]?; .check_id == "CKV_SECRET_6" and .resource == $h)' \
+                 "$report" >/dev/null; then
+            echo "::error::Checkov secrets scan did not report the known fake value in the fixture"
+            exit 1
+          fi
+          echo "Checkov secrets scan reported the known fake value as expected."
+
+      - name: Negative test - Hadolint flags the insecure Dockerfile fixture
+        env:
+          FIXTURE: task-02-security-review/fixtures/example-insecure.Dockerfile
+          # hadolint/hadolint:v2.15.1, pinned by digest
+          HADOLINT_IMAGE: hadolint/hadolint@sha256:32dac94127fd60b7b7e3fbfc65e1383b9b5e25c9bfd7b8536de7a539fe68a12d
+        run: |
+          set -euo pipefail
+          report="$(mktemp)"
+          if ! docker run --rm -i "$HADOLINT_IMAGE" /bin/hadolint --no-fail --format json - \
+                 < "$FIXTURE" > "$report"; then
+            echo "::error::Hadolint failed to run (tool error, not a finding)"
+            exit 1
+          fi
+          # DL3002: last USER is root (D-2). DL3025: shell-form CMD (D-8).
+          for rule in DL3002 DL3025; do
+            if ! jq -e --arg r "$rule" 'any(.[]; .code == $r)' "$report" >/dev/null; then
+              echo "::error::Hadolint did not report ${rule} on the insecure fixture"
+              exit 1
+            fi
+          done
+          echo "Hadolint detected DL3002 and DL3025 as expected."
+
+  trivy:
+    name: Trivy (config, secrets, image)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Trivy misconfiguration scan (remediated files)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: task-02-security-review
+          scanners: misconfig
+          skip-dirs: task-02-security-review/fixtures
+          severity: MEDIUM,HIGH,CRITICAL
+          exit-code: "1"
+
+      # Secret scan of every file, fixtures included, with no skipped paths and
+      # no allow-rules. Trivy was not run locally, so no exception is added
+      # speculatively. If it reports the known fake values from the brief, add
+      # an allow-rule matching only those exact values (never a path or rule-wide
+      # exception), and extend tests/known-fake-secrets.sh accordingly.
+      - name: Trivy secret scan (all files)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: fs
+          scan-ref: task-02-security-review
+          scanners: secret
+          exit-code: "1"
+
+      # The assessment does not include app.py, so the image contains only the
+      # base image and a non-root user. That is still enough to scan the OS and
+      # Python runtime packages.
+      - name: Build image
+        run: docker build -f "${TASK_DIR}/docker/Dockerfile" -t "task02:${GITHUB_SHA}" "${TASK_DIR}/docker"
+
+      - name: Trivy image scan (fail on fixable HIGH/CRITICAL)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: task02:${{ github.sha }}
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: "1"
