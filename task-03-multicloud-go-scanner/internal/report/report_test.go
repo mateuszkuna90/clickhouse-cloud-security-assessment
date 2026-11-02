@@ -114,7 +114,8 @@ func fixtureResults(t *testing.T) []model.ProviderResult {
 				{Provider: model.ProviderGCP, Scope: "example-project-b", Status: model.ScopeFailed},
 			},
 			GCPFirewallRules: []model.GCPFirewallRule{
-				{Name: "allow-all", Network: "default", Project: gcpScope, ID: "1234567890", InsecureRules: gcpFindings},
+				{Name: "allow-all", Network: "default", Project: gcpScope, ID: "1234567890", Direction: "INGRESS",
+					InsecureRules: gcpFindings},
 			},
 			Diagnostics: gcpDiags,
 			Errors: []model.ScanError{{

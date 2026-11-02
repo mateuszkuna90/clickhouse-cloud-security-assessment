@@ -51,6 +51,9 @@ const (
 	CodeProtocolUnknown       = "protocol_unknown"
 	CodePortMalformed         = "port_malformed"
 	CodeNoScopesDiscovered    = "no_scopes_discovered"
+	// CodeResourceIDMissing: the API returned a resource without its ID.
+	// Its rules are still evaluated; findings carry an empty ID.
+	CodeResourceIDMissing = "resource_id_missing"
 )
 
 // Diagnostic effects.
@@ -153,10 +156,14 @@ type AWSSecurityGroup struct {
 
 // GCPFirewallRule is a VPC firewall rule with at least one finding.
 type GCPFirewallRule struct {
-	Name          string         `json:"name"`
-	Network       string         `json:"network"`
-	Project       string         `json:"project"`
-	ID            string         `json:"id"`
+	Name    string `json:"name"`
+	Network string `json:"network"`
+	Project string `json:"project"`
+	ID      string `json:"id"`
+	// Direction is the raw API value: "INGRESS", or "" when the API
+	// omitted it (GCP then applies INGRESS). Only ingress rules can have
+	// findings.
+	Direction     string         `json:"direction"`
 	InsecureRules []InsecureRule `json:"insecure_rules"`
 }
 

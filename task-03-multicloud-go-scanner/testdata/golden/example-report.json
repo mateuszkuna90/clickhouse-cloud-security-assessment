@@ -116,6 +116,7 @@
         "network": "default",
         "project": "example-project-a",
         "id": "1234567890",
+        "direction": "INGRESS",
         "insecure_rules": [
           {
             "protocol": "icmp",

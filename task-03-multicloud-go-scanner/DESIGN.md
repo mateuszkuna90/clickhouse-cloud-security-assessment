@@ -167,7 +167,7 @@ The CLI uses only the standard library plus the official SDKs (`flag`,
 | Purpose | Module |
 |---|---|
 | AWS | `github.com/aws/aws-sdk-go-v2/config`, `.../service/ec2`, `.../service/sts` |
-| GCP | `cloud.google.com/go/compute/apiv1` (+ `computepb`), `google.golang.org/api/iterator`, `google.golang.org/api/option` |
+| GCP | `google.golang.org/api/compute/v1` (REST client), `google.golang.org/api/option`, `google.golang.org/api/googleapi`, `cloud.google.com/go/auth` (ADC, HTTP transport) |
 | Azure | `github.com/Azure/azure-sdk-for-go/sdk/azidentity`, `.../sdk/azcore`, `.../sdk/resourcemanager/network/armnetwork/vN` (*verify* latest major), `.../sdk/resourcemanager/resources/armsubscriptions` |
 
 Versions are fixed in `go.mod`/`go.sum`. Go is **not installed** on the
@@ -203,11 +203,11 @@ type STSAPI interface {
 type ClientFactory func(region string) EC2API
 ```
 
-**GCP.** The SDK iterator is a concrete type, so the adapter drains it:
+**GCP.** The adapter requests every page itself (5.6) and returns the complete list:
 
 ```go
 type FirewallLister interface {
-    ListFirewalls(ctx context.Context, project string) ([]*computepb.Firewall, error)
+    ListFirewalls(ctx context.Context, project string) ([]*compute.Firewall, error) // compute = google.golang.org/api/compute/v1
 }
 ```
 
@@ -361,7 +361,7 @@ on, do not appear in discovery and are not covered.
 | Cloud | Mechanism |
 |---|---|
 | AWS | `ec2.NewDescribeSecurityGroupsPaginator`, `MaxResults: 1000`, follows `NextToken` |
-| GCP | `FirewallsClient.List` iterator until `iterator.Done` (`nextPageToken`) |
+| GCP | `Firewalls.List(project).MaxResults(500).PageToken(t).Context(ctx).Do()`, one call per page, until `nextPageToken` is empty; a repeated token or more than 1000 pages fails the scope |
 | Azure | `NewListAllPager` / subscriptions pager while `More()` (`nextLink`) |
 
 An error on any page **fails the whole scope**; results already read from
@@ -376,7 +376,7 @@ same tested code and counts are accurate.
 | Whole run | `--timeout` | `10m` |
 | One scope | `--scope-timeout` | `2m` |
 | Parallel scopes per provider | `--concurrency` | `8` |
-| SDK retries | built in | AWS standard retryer (5 attempts), GCP gax defaults for idempotent list, Azure `policy.RetryOptions` (4 retries) |
+| SDK retries | built in | AWS standard retryer (5 attempts), GCP none (the `compute/v1` REST client does not retry `firewalls.list`; a failed page fails the scope), Azure `policy.RetryOptions` (4 retries) |
 
 Providers run concurrently; scopes run in a bounded worker pool. A failure
 does not cancel siblings. When a deadline expires, unfinished scopes are
@@ -460,7 +460,7 @@ separate list and is not read):
   (`not_world`).
 - One finding per (permission, world CIDR).
 
-**GCP** — `computepb.Firewall`:
+**GCP** — `compute.Firewall` (`google.golang.org/api/compute/v1`):
 
 - `direction` (compared case-sensitively against the API enum values):
 
