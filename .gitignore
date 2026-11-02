@@ -42,3 +42,112 @@ terraform.rc
 # Optional: ignore plan files saved before destroying Terraform configuration
 # Uncomment the line below if you want to ignore planout files.
 # planout
+
+# ===========================================================================
+# Repository safety patterns
+#
+# Principle: ignore files by names that indicate REAL secrets or local state.
+# Do NOT ignore whole file types (e.g. *.pem, *.crt, *.yaml) that are also
+# used for public certificates, test fixtures and declarative examples.
+#
+# .gitignore matches file names only, never content. It is a safety net, not
+# a secret scanner; use a content scanner (e.g. gitleaks) for that.
+#
+# Intentionally NOT ignored:
+#   .terraform.lock.hcl, go.sum, package-lock.json and other lockfiles
+#   public certificates (*.crt, *.cer, ca.pem, cert.pem)
+#   *.example / *.sample templates and anything under testdata/ or fixtures/
+#   that follows the fake-* / dummy-* / example-* naming convention
+# ===========================================================================
+
+# --- Terraform: state, plans and local variable overrides ------------------
+*.tfplan
+tfplan
+*.tfvars.local
+
+# --- Local environment files (templates stay tracked) ----------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# --- Cloud credentials ------------------------------------------------------
+# GCP service account keys and ADC files
+*-sa-key*.json
+*sa-key.json
+service-account*.json
+application_default_credentials.json
+credentials.json
+*-credentials.json
+*_credentials.json
+# Local CLI credential directories, if ever created inside the repo
+.gcloud/
+.config/gcloud/
+.aws/
+.azure/
+# Kubernetes client credentials
+kubeconfig
+*.kubeconfig
+
+# --- Private keys and keystores ---------------------------------------------
+*.key
+*-key.pem
+*_key.pem
+*.key.pem
+key.pem
+privkey*.pem
+*private*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+.netrc
+.pypirc
+
+# --- Local secret stores ----------------------------------------------------
+# Hidden directory/file names only; plain "secrets" may be a code package.
+.secrets/
+*.secret
+
+# --- Allow-list: clearly fake fixtures and examples -------------------------
+# Must come after the rules above. Only files are re-included; ignored
+# directories (e.g. .secrets/) cannot be re-included by design.
+!**/testdata/**/fake-*
+!**/testdata/**/dummy-*
+!**/testdata/**/example-*
+!**/fixtures/**/fake-*
+!**/fixtures/**/dummy-*
+!**/fixtures/**/example-*
+!*.example
+!*.example.*
+!*.sample
+!*.sample.*
+
+# --- Temporary, editor and OS files ----------------------------------------
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+*.log
+tmp/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# --- Tooling caches and build output ---------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.out
