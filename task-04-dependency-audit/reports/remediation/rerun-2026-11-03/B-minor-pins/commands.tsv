@@ -1,0 +1,5 @@
+exit_code	command
+0	npm install express@4.22.3 lodash@4.18.1 --save-exact --package-lock-only --ignore-scripts --no-audit --no-fund
+0	npm ls --package-lock-only --all
+0	npm ci --dry-run --ignore-scripts --no-audit --no-fund
+1	npm audit --json

@@ -1,0 +1,5 @@
+exit_code	command
+1	npm audit fix --package-lock-only --ignore-scripts
+0	npm ls --package-lock-only --all
+0	npm ci --dry-run --ignore-scripts --no-audit --no-fund
+1	npm audit --json

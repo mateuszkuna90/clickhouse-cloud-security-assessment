@@ -1,0 +1,39 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "example-major": {
+      "name": "example-major",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 900003,
+          "name": "example-major",
+          "title": "Example signature bypass",
+          "url": "https://github.com/advisories/GHSA-8888-9999-cccc",
+          "severity": "high",
+          "range": "<9.0.0"
+        }
+      ],
+      "effects": [],
+      "range": "<9.0.0",
+      "nodes": [
+        "node_modules/example-major"
+      ],
+      "fixAvailable": {
+        "name": "example-major",
+        "version": "9.0.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 1,
+      "critical": 0,
+      "total": 1
+    }
+  }
+}

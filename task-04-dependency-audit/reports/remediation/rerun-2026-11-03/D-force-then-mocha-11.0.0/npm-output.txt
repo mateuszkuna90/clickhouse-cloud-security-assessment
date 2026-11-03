@@ -1,0 +1,437 @@
+
+up to date in 1s
+vulnerable-node-app@1.0.0 <work>\D-force-then-mocha-11.0.0
++-- body-parser@1.20.9
+| +-- bytes@3.1.2
+| +-- content-type@1.0.5
+| +-- debug@2.6.9
+| | `-- ms@2.0.0
+| +-- depd@2.0.0
+| +-- destroy@1.2.0
+| +-- http-errors@2.0.1
+| | +-- depd@2.0.0 deduped
+| | +-- inherits@2.0.4
+| | +-- setprototypeof@1.2.0 deduped
+| | +-- statuses@2.0.2 deduped
+| | `-- toidentifier@1.0.1
+| +-- iconv-lite@0.4.24
+| | `-- safer-buffer@2.1.2
+| +-- on-finished@2.4.2
+| | `-- ee-first@1.1.1
+| +-- qs@6.16.2
+| | +-- es-define-property@1.0.1
+| | `-- side-channel@1.1.1
+| |   +-- es-errors@1.3.0
+| |   +-- object-inspect@1.13.4
+| |   +-- side-channel-list@1.0.1
+| |   | +-- es-errors@1.3.0 deduped
+| |   | `-- object-inspect@1.13.4 deduped
+| |   +-- side-channel-map@1.0.1
+| |   | +-- call-bound@1.0.4
+| |   | | +-- call-bind-apply-helpers@1.0.2
+| |   | | | +-- es-errors@1.3.0 deduped
+| |   | | | `-- function-bind@1.1.2 deduped
+| |   | | `-- get-intrinsic@1.3.0 deduped
+| |   | +-- es-errors@1.3.0 deduped
+| |   | +-- get-intrinsic@1.3.0
+| |   | | +-- call-bind-apply-helpers@1.0.2 deduped
+| |   | | +-- es-define-property@1.0.1 deduped
+| |   | | +-- es-errors@1.3.0 deduped
+| |   | | +-- es-object-atoms@1.1.2
+| |   | | | `-- es-errors@1.3.0 deduped
+| |   | | +-- function-bind@1.1.2
+| |   | | +-- get-proto@1.0.1
+| |   | | | +-- dunder-proto@1.0.1
+| |   | | | | +-- call-bind-apply-helpers@1.0.2 deduped
+| |   | | | | +-- es-errors@1.3.0 deduped
+| |   | | | | `-- gopd@1.2.0 deduped
+| |   | | | `-- es-object-atoms@1.1.2 deduped
+| |   | | +-- gopd@1.2.0
+| |   | | +-- has-symbols@1.1.0
+| |   | | +-- hasown@2.0.4
+| |   | | | `-- function-bind@1.1.2 deduped
+| |   | | `-- math-intrinsics@1.1.0
+| |   | `-- object-inspect@1.13.4 deduped
+| |   `-- side-channel-weakmap@1.0.2
+| |     +-- call-bound@1.0.4 deduped
+| |     +-- es-errors@1.3.0 deduped
+| |     +-- get-intrinsic@1.3.0 deduped
+| |     +-- object-inspect@1.13.4 deduped
+| |     `-- side-channel-map@1.0.1 deduped
+| +-- raw-body@2.5.3
+| | +-- bytes@3.1.2 deduped
+| | +-- http-errors@2.0.1 deduped
+| | +-- iconv-lite@0.4.24 deduped
+| | `-- unpipe@1.0.0 deduped
+| +-- type-is@1.6.18
+| | +-- media-typer@0.3.0
+| | `-- mime-types@2.1.35
+| |   `-- mime-db@1.52.0
+| `-- unpipe@1.0.0
++-- dotenv@8.6.0
++-- express@4.22.3
+| +-- accepts@1.3.8
+| | +-- mime-types@2.1.35 deduped
+| | `-- negotiator@0.6.3
+| +-- array-flatten@1.1.1
+| +-- body-parser@1.20.9 deduped
+| +-- content-disposition@0.5.4
+| | `-- safe-buffer@5.2.1 deduped
+| +-- content-type@1.0.5 deduped
+| +-- cookie-signature@1.0.6
+| +-- cookie@0.7.2
+| +-- debug@2.6.9 deduped
+| +-- depd@2.0.0 deduped
+| +-- encodeurl@2.0.1
+| +-- escape-html@1.0.3
+| +-- etag@1.8.1
+| +-- finalhandler@1.3.2
+| | +-- debug@2.6.9 deduped
+| | +-- encodeurl@2.0.1 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- on-finished@2.4.2 deduped
+| | +-- parseurl@1.3.3 deduped
+| | +-- statuses@2.0.2 deduped
+| | `-- unpipe@1.0.0 deduped
+| +-- fresh@0.5.2
+| +-- http-errors@2.0.1 deduped
+| +-- merge-descriptors@1.0.3
+| +-- methods@1.1.2
+| +-- on-finished@2.4.2 deduped
+| +-- parseurl@1.3.3
+| +-- path-to-regexp@0.1.13
+| +-- proxy-addr@2.0.8
+| | +-- forwarded@0.2.0
+| | `-- ipaddr.js@1.9.1
+| +-- qs@6.16.2 deduped
+| +-- range-parser@1.2.1
+| +-- safe-buffer@5.2.1
+| +-- send@0.19.2
+| | +-- debug@2.6.9 deduped
+| | +-- depd@2.0.0 deduped
+| | +-- destroy@1.2.0 deduped
+| | +-- encodeurl@2.0.1 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- etag@1.8.1 deduped
+| | +-- fresh@0.5.2 deduped
+| | +-- http-errors@2.0.1 deduped
+| | +-- mime@1.6.0
+| | +-- ms@2.1.3
+| | +-- on-finished@2.4.2 deduped
+| | +-- range-parser@1.2.1 deduped
+| | `-- statuses@2.0.2 deduped
+| +-- serve-static@1.16.3
+| | +-- encodeurl@2.0.1 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- parseurl@1.3.3 deduped
+| | `-- send@0.19.2 deduped
+| +-- setprototypeof@1.2.0
+| +-- statuses@2.0.2
+| +-- type-is@1.6.18 deduped
+| +-- utils-merge@1.0.1
+| `-- vary@1.1.2
++-- jsonwebtoken@9.0.3
+| +-- jws@4.0.1
+| | +-- jwa@2.0.1
+| | | +-- buffer-equal-constant-time@1.0.1
+| | | +-- ecdsa-sig-formatter@1.0.11
+| | | | `-- safe-buffer@5.2.1 deduped
+| | | `-- safe-buffer@5.2.1 deduped
+| | `-- safe-buffer@5.2.1 deduped
+| +-- lodash.includes@4.3.0
+| +-- lodash.isboolean@3.0.3
+| +-- lodash.isinteger@4.0.4
+| +-- lodash.isnumber@3.0.3
+| +-- lodash.isplainobject@4.0.6
+| +-- lodash.isstring@4.0.1
+| +-- lodash.once@4.1.1
+| +-- ms@2.1.3
+| `-- semver@7.8.6
++-- lodash@4.18.1
++-- mocha@11.0.0
+| +-- ansi-colors@4.1.3
+| +-- browser-stdout@1.3.1
+| +-- chokidar@3.6.0
+| | +-- anymatch@3.1.3
+| | | +-- normalize-path@3.0.0 deduped
+| | | `-- picomatch@2.3.2
+| | +-- braces@3.0.3
+| | | `-- fill-range@7.1.1
+| | |   `-- to-regex-range@5.0.1
+| | |     `-- is-number@7.0.0
+| | +-- fsevents@2.3.3
+| | +-- glob-parent@5.1.2
+| | | `-- is-glob@4.0.3 deduped
+| | +-- is-binary-path@2.1.0
+| | | `-- binary-extensions@2.3.0
+| | +-- is-glob@4.0.3
+| | | `-- is-extglob@2.1.1
+| | +-- normalize-path@3.0.0
+| | `-- readdirp@3.6.0
+| |   `-- picomatch@2.3.2 deduped
+| +-- debug@4.4.3
+| | `-- ms@2.1.3 deduped
+| +-- diff@5.2.2
+| +-- escape-string-regexp@4.0.0
+| +-- find-up@5.0.0
+| | +-- locate-path@6.0.0
+| | | `-- p-locate@5.0.0
+| | |   `-- p-limit@3.1.0
+| | |     `-- yocto-queue@0.1.0
+| | `-- path-exists@4.0.0
+| +-- glob@8.1.0
+| | +-- fs.realpath@1.0.0
+| | +-- inflight@1.0.6
+| | | +-- once@1.4.0 deduped
+| | | `-- wrappy@1.0.2
+| | +-- inherits@2.0.4 deduped
+| | +-- minimatch@5.1.9 deduped
+| | `-- once@1.4.0
+| |   `-- wrappy@1.0.2 deduped
+| +-- he@1.2.0
+| +-- js-yaml@4.3.2
+| | `-- argparse@2.0.1
+| +-- log-symbols@4.1.0
+| | +-- chalk@4.1.2
+| | | +-- ansi-styles@4.3.0
+| | | | `-- color-convert@2.0.1
+| | | |   `-- color-name@1.1.4
+| | | `-- supports-color@7.2.0
+| | |   `-- has-flag@4.0.0 deduped
+| | `-- is-unicode-supported@0.1.0
+| +-- minimatch@5.1.9
+| | `-- brace-expansion@2.1.7
+| |   `-- balanced-match@1.0.2
+| +-- ms@2.1.3
+| +-- serialize-javascript@6.0.2
+| | `-- randombytes@2.1.0
+| |   `-- safe-buffer@5.2.1 deduped
+| +-- strip-json-comments@3.1.1
+| +-- supports-color@8.1.1
+| | `-- has-flag@4.0.0
+| +-- workerpool@6.5.1
+| +-- yargs-parser@20.2.9
+| +-- yargs-unparser@2.0.0
+| | +-- camelcase@6.3.0
+| | +-- decamelize@4.0.0
+| | +-- flat@5.0.2
+| | `-- is-plain-obj@2.1.0
+| `-- yargs@16.2.2
+|   +-- cliui@7.0.4
+|   | +-- string-width@4.2.3 deduped
+|   | +-- strip-ansi@6.0.1
+|   | | `-- ansi-regex@5.0.1
+|   | `-- wrap-ansi@7.0.0
+|   |   +-- ansi-styles@4.3.0 deduped
+|   |   +-- string-width@4.2.3 deduped
+|   |   `-- strip-ansi@6.0.1 deduped
+|   +-- escalade@3.2.0
+|   +-- get-caller-file@2.0.5
+|   +-- require-directory@2.1.1
+|   +-- string-width@4.2.3
+|   | +-- emoji-regex@8.0.0
+|   | +-- is-fullwidth-code-point@3.0.0
+|   | `-- strip-ansi@6.0.1 deduped
+|   +-- y18n@5.0.8
+|   `-- yargs-parser@20.2.9 deduped
+`-- mongoose@9.11.4
+  +-- @standard-schema/spec@1.1.0
+  +-- kareem@3.4.1
+  +-- mongodb@7.7.0
+  | +-- UNMET OPTIONAL DEPENDENCY @aws-sdk/credential-providers@^3.806.0
+  | +-- @mongodb-js/saslprep@1.6.1
+  | | `-- sparse-bitfield@3.0.3
+  | |   `-- memory-pager@1.5.0
+  | +-- UNMET OPTIONAL DEPENDENCY @mongodb-js/zstd@^7.0.0
+  | +-- bson@7.3.3
+  | +-- UNMET OPTIONAL DEPENDENCY gcp-metadata@^7.0.1
+  | +-- UNMET OPTIONAL DEPENDENCY kerberos@^7.0.0
+  | +-- UNMET OPTIONAL DEPENDENCY mongodb-client-encryption@^7.2.0
+  | +-- mongodb-connection-string-url@7.0.2
+  | | +-- @types/whatwg-url@13.0.0
+  | | | `-- @types/webidl-conversions@7.0.3
+  | | `-- whatwg-url@14.2.0
+  | |   +-- tr46@5.1.1
+  | |   | `-- punycode@2.3.1
+  | |   `-- webidl-conversions@7.0.0
+  | +-- UNMET OPTIONAL DEPENDENCY snappy@^7.3.2
+  | `-- UNMET OPTIONAL DEPENDENCY socks@^2.8.6
+  +-- mpath@0.9.0
+  +-- mquery@6.0.1
+  +-- ms@2.1.3
+  `-- sift@17.1.3
+
+add yocto-queue 0.1.0
+add yargs-unparser 2.0.0
+add yargs-parser 20.2.9
+add yargs 16.2.2
+add y18n 5.0.8
+add wrappy 1.0.2
+add wrap-ansi 7.0.0
+add workerpool 6.5.1
+add whatwg-url 14.2.0
+add webidl-conversions 7.0.0
+add vary 1.1.2
+add utils-merge 1.0.1
+add unpipe 1.0.0
+add type-is 1.6.18
+add tr46 5.1.1
+add toidentifier 1.0.1
+add to-regex-range 5.0.1
+add supports-color 8.1.1
+add strip-json-comments 3.1.1
+add strip-ansi 6.0.1
+add string-width 4.2.3
+add statuses 2.0.2
+add sparse-bitfield 3.0.3
+add sift 17.1.3
+add side-channel-weakmap 1.0.2
+add side-channel-map 1.0.1
+add side-channel-list 1.0.1
+add side-channel 1.1.1
+add setprototypeof 1.2.0
+add serve-static 1.16.3
+add serialize-javascript 6.0.2
+add send 0.19.2
+add ms 2.1.3
+add semver 7.8.6
+add safer-buffer 2.1.2
+add safe-buffer 5.2.1
+add require-directory 2.1.1
+add readdirp 3.6.0
+add raw-body 2.5.3
+add range-parser 1.2.1
+add randombytes 2.1.0
+add qs 6.16.2
+add punycode 2.3.1
+add proxy-addr 2.0.8
+add picomatch 2.3.2
+add path-to-regexp 0.1.13
+add path-exists 4.0.0
+add parseurl 1.3.3
+add p-locate 5.0.0
+add p-limit 3.1.0
+add once 1.4.0
+add on-finished 2.4.2
+add object-inspect 1.13.4
+add normalize-path 3.0.0
+add negotiator 0.6.3
+add ms 2.0.0
+add mquery 6.0.1
+add mpath 0.9.0
+add mongoose 9.11.4
+add ms 2.1.3
+add mongodb-connection-string-url 7.0.2
+add mongodb 7.7.0
+add mocha 11.0.0
+add ms 2.1.3
+add debug 4.4.3
+add minimatch 5.1.9
+add mime-types 2.1.35
+add mime-db 1.52.0
+add mime 1.6.0
+add methods 1.1.2
+add merge-descriptors 1.0.3
+add memory-pager 1.5.0
+add media-typer 0.3.0
+add math-intrinsics 1.1.0
+add log-symbols 4.1.0
+add lodash.once 4.1.1
+add lodash.isstring 4.0.1
+add lodash.isplainobject 4.0.6
+add lodash.isnumber 3.0.3
+add lodash.isinteger 4.0.4
+add lodash.isboolean 3.0.3
+add lodash.includes 4.3.0
+add lodash 4.18.1
+add locate-path 6.0.0
+add kareem 3.4.1
+add jws 4.0.1
+add jwa 2.0.1
+add jsonwebtoken 9.0.3
+add ms 2.1.3
+add js-yaml 4.3.2
+add is-unicode-supported 0.1.0
+add is-plain-obj 2.1.0
+add is-number 7.0.0
+add is-glob 4.0.3
+add is-fullwidth-code-point 3.0.0
+add is-extglob 2.1.1
+add is-binary-path 2.1.0
+add ipaddr.js 1.9.1
+add inherits 2.0.4
+add inflight 1.0.6
+add iconv-lite 0.4.24
+add http-errors 2.0.1
+add he 1.2.0
+add hasown 2.0.4
+add has-symbols 1.1.0
+add has-flag 4.0.0
+add gopd 1.2.0
+add glob-parent 5.1.2
+add glob 8.1.0
+add get-proto 1.0.1
+add get-intrinsic 1.3.0
+add get-caller-file 2.0.5
+add function-bind 1.1.2
+add fs.realpath 1.0.0
+add fresh 0.5.2
+add forwarded 0.2.0
+add flat 5.0.2
+add find-up 5.0.0
+add finalhandler 1.3.2
+add fill-range 7.1.1
+add express 4.22.3
+add etag 1.8.1
+add escape-string-regexp 4.0.0
+add escape-html 1.0.3
+add escalade 3.2.0
+add es-object-atoms 1.1.2
+add es-errors 1.3.0
+add es-define-property 1.0.1
+add encodeurl 2.0.1
+add emoji-regex 8.0.0
+add ee-first 1.1.1
+add ecdsa-sig-formatter 1.0.11
+add dunder-proto 1.0.1
+add dotenv 8.6.0
+add diff 5.2.2
+add destroy 1.2.0
+add depd 2.0.0
+add decamelize 4.0.0
+add debug 2.6.9
+add cookie-signature 1.0.6
+add cookie 0.7.2
+add content-type 1.0.5
+add content-disposition 0.5.4
+add color-name 1.1.4
+add color-convert 2.0.1
+add cliui 7.0.4
+add chokidar 3.6.0
+add chalk 4.1.2
+add supports-color 7.2.0
+add camelcase 6.3.0
+add call-bound 1.0.4
+add call-bind-apply-helpers 1.0.2
+add bytes 3.1.2
+add buffer-equal-constant-time 1.0.1
+add bson 7.3.3
+add browser-stdout 1.3.1
+add braces 3.0.3
+add brace-expansion 2.1.7
+add body-parser 1.20.9
+add binary-extensions 2.3.0
+add balanced-match 1.0.2
+add array-flatten 1.1.1
+add argparse 2.0.1
+add anymatch 3.1.3
+add ansi-styles 4.3.0
+add ansi-regex 5.0.1
+add ansi-colors 4.1.3
+add accepts 1.3.8
+add @types/whatwg-url 13.0.0
+add @types/webidl-conversions 7.0.3
+add @standard-schema/spec 1.1.0
+add @mongodb-js/saslprep 1.6.1
+
+added 172 packages in 346ms

@@ -1,0 +1,3 @@
+# Task 4: never commit installed packages or partial script output.
+node_modules/
+*.partial

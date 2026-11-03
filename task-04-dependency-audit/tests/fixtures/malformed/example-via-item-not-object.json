@@ -1,0 +1,151 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "example-direct": {
+      "name": "example-direct",
+      "severity": "critical",
+      "isDirect": true,
+      "via": [
+        "example-child",
+        {
+          "source": 900001,
+          "name": "example-direct",
+          "dependency": "example-direct",
+          "title": "Example prototype pollution",
+          "url": "https://github.com/advisories/GHSA-2222-3333-4444",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<1.2.3"
+        }
+      ],
+      "effects": [],
+      "range": "<1.2.3",
+      "nodes": [
+        "node_modules/example-direct"
+      ],
+      "fixAvailable": {
+        "name": "example-direct",
+        "version": "1.2.3",
+        "isSemVerMajor": false
+      }
+    },
+    "example-child": {
+      "name": "example-child",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 900002,
+          "name": "example-child",
+          "dependency": "example-child",
+          "title": "=HYPERLINK(\"http://example.invalid\")",
+          "url": "https://github.com/advisories/GHSA-5555-6666-7777",
+          "severity": "critical",
+          "cwe": [],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": null
+          },
+          "range": "<0.5.0"
+        }
+      ],
+      "effects": [
+        "example-direct"
+      ],
+      "range": "<0.5.0",
+      "nodes": [
+        "node_modules/example-child",
+        "node_modules/example-direct/node_modules/example-child"
+      ],
+      "fixAvailable": {
+        "name": "example-direct",
+        "version": "1.2.3",
+        "isSemVerMajor": false
+      }
+    },
+    "example-major": {
+      "name": "example-major",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        42
+      ],
+      "effects": [],
+      "range": "<9.0.0",
+      "nodes": [
+        "node_modules/example-major"
+      ],
+      "fixAvailable": {
+        "name": "example-major",
+        "version": "9.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "example-nofix": {
+      "name": "example-nofix",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 900004,
+          "name": "example-nofix",
+          "title": "Example ReDoS",
+          "severity": "moderate",
+          "url": "https://example.invalid/advisory/4",
+          "range": "<3.2.0"
+        }
+      ],
+      "effects": [],
+      "nodes": [
+        "node_modules/example-nofix"
+      ],
+      "fixAvailable": false,
+      "range": "<3.2.0"
+    },
+    "example-auto": {
+      "name": "example-auto",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 900005,
+          "name": "example-auto",
+          "title": "Example low issue",
+          "url": "https://example.invalid/advisory/5",
+          "severity": "low",
+          "range": "<2.0.0"
+        }
+      ],
+      "effects": [],
+      "range": "<2.0.0",
+      "nodes": [
+        "node_modules/example-auto"
+      ],
+      "fixAvailable": true
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 1,
+      "high": 1,
+      "critical": 2,
+      "total": 5
+    },
+    "dependencies": {
+      "prod": 10,
+      "dev": 0,
+      "optional": 0,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 10
+    }
+  }
+}
