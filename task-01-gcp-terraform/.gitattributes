@@ -1,0 +1,6 @@
+# files/startup.sh is read with file() and executed by bash on the VM. A CRLF
+# checkout (core.autocrlf=true on Windows) would break it, so force LF.
+*.sh      text eol=lf
+*.tf      text eol=lf
+*.tftest.hcl text eol=lf
+*.hcl     text eol=lf

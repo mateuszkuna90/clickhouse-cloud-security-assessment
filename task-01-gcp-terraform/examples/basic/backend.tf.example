@@ -1,0 +1,10 @@
+# Remote state template. Copy to backend.tf and set a real bucket.
+# The bucket should have: object versioning, uniform bucket-level access,
+# public access prevention enforced, optional CMEK, and IAM limited to the
+# deployer identity. State holds no private keys or secrets from this module.
+terraform {
+  backend "gcs" {
+    bucket = "example-tfstate-bucket"
+    prefix = "task-01/secure-web"
+  }
+}
