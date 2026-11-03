@@ -1,0 +1,20 @@
+# Placeholder values only. Copy to terraform.tfvars (git-ignored) and edit.
+project_id = "example-project-id"
+region     = "europe-west1"
+zone       = "europe-west1-b"
+
+# A domain you control. Its public DNS A record must point to the
+# load_balancer_ip output before the managed certificate can be issued.
+managed_certificate_domains = ["app.example.com"]
+
+# Default: IAP TCP forwarding only.
+ssh_source_ranges = ["35.235.240.0/20"]
+# With an EXISTING Cloud VPN/Interconnect, add your private admin range, e.g.:
+# ssh_source_ranges = ["35.235.240.0/20", "10.20.0.0/16"]
+
+ssh_admin_members = ["group:gcp-admins@example.com"]
+
+deletion_protection = true
+
+# Optional: deploy with short-lived impersonated credentials.
+# impersonate_service_account = "terraform-deployer@example-project-id.iam.gserviceaccount.com"
