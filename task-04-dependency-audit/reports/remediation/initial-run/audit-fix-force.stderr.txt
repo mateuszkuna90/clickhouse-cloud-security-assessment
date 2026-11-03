@@ -1,0 +1,6 @@
+npm warn using --force Recommended protections disabled.
+npm warn audit Updating express to 4.22.3, which is outside your stated dependency range.
+npm warn audit Updating jsonwebtoken to 9.0.3, which is a SemVer major change.
+npm warn audit Updating lodash to 4.18.1, which is outside your stated dependency range.
+npm warn audit Updating mongoose to 9.11.4, which is a SemVer major change.
+npm warn audit Updating mocha to 12.0.3, which is a SemVer major change.

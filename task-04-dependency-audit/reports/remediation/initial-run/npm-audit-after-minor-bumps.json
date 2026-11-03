@@ -1,0 +1,618 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "async": {
+      "name": "async",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1097691,
+          "name": "async",
+          "dependency": "async",
+          "title": "Prototype Pollution in async",
+          "url": "https://github.com/advisories/GHSA-fwr7-v2mv-hh25",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.8,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=2.0.0 <2.6.4"
+        }
+      ],
+      "effects": [
+        "mongoose"
+      ],
+      "range": "2.0.0 - 2.6.3",
+      "nodes": [
+        "node_modules/async"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "bson": {
+      "name": "bson",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1092294,
+          "name": "bson",
+          "dependency": "bson",
+          "title": "Deserialization of Untrusted Data in bson",
+          "url": "https://github.com/advisories/GHSA-4jwp-vfvf-657p",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-502"
+          ],
+          "cvss": {
+            "score": 5.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<1.1.4"
+        },
+        {
+          "source": 1102316,
+          "name": "bson",
+          "dependency": "bson",
+          "title": "Deserialization of Untrusted Data in bson",
+          "url": "https://github.com/advisories/GHSA-v8w9-2789-6hhr",
+          "severity": "critical",
+          "cwe": [
+            "CWE-502"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<1.1.4"
+        }
+      ],
+      "effects": [
+        "mongodb-core",
+        "mongoose"
+      ],
+      "range": "<=1.1.3",
+      "nodes": [
+        "node_modules/bson"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "diff": {
+      "name": "diff",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112703,
+          "name": "diff",
+          "dependency": "diff",
+          "title": "jsdiff has a Denial of Service vulnerability in parsePatch and applyPatch",
+          "url": "https://github.com/advisories/GHSA-73rr-hh4g-fpgx",
+          "severity": "low",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<3.5.1"
+        }
+      ],
+      "effects": [
+        "mocha"
+      ],
+      "range": "<3.5.1",
+      "nodes": [
+        "node_modules/diff"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "minimatch"
+      ],
+      "effects": [
+        "mocha"
+      ],
+      "range": "3.0.0 - 13.0.6",
+      "nodes": [
+        "node_modules/glob"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "jsonwebtoken": {
+      "name": "jsonwebtoken",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1097690,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken unrestricted key type could lead to legacy keys usage ",
+          "url": "https://github.com/advisories/GHSA-8cf7-32gw-wr33",
+          "severity": "high",
+          "cwe": [
+            "CWE-327"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": "<=8.5.1"
+        },
+        {
+          "source": 1097694,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC",
+          "url": "https://github.com/advisories/GHSA-hjrf-2m68-5959",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-287",
+            "CWE-1259"
+          ],
+          "cvss": {
+            "score": 5,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<=8.5.1"
+        },
+        {
+          "source": 1102458,
+          "name": "jsonwebtoken",
+          "dependency": "jsonwebtoken",
+          "title": "jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify()",
+          "url": "https://github.com/advisories/GHSA-qwph-4952-7xr6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-287",
+            "CWE-327",
+            "CWE-347"
+          ],
+          "cvss": {
+            "score": 6.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:L/I:H/A:L"
+          },
+          "range": "<9.0.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=8.5.1",
+      "nodes": [
+        "node_modules/jsonwebtoken"
+      ],
+      "fixAvailable": {
+        "name": "jsonwebtoken",
+        "version": "9.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244012,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-405"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<11.0.1"
+        }
+      ],
+      "effects": [
+        "glob"
+      ],
+      "range": "<11.0.1",
+      "nodes": [
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "minimist": {
+      "name": "minimist",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1096466,
+          "name": "minimist",
+          "dependency": "minimist",
+          "title": "Prototype Pollution in minimist",
+          "url": "https://github.com/advisories/GHSA-vh95-rmgr-6w4m",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<0.2.1"
+        },
+        {
+          "source": 1097677,
+          "name": "minimist",
+          "dependency": "minimist",
+          "title": "Prototype Pollution in minimist",
+          "url": "https://github.com/advisories/GHSA-xvch-5gv4-984h",
+          "severity": "critical",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<0.2.4"
+        }
+      ],
+      "effects": [
+        "mkdirp"
+      ],
+      "range": "<=0.2.3",
+      "nodes": [
+        "node_modules/minimist"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "mkdirp": {
+      "name": "mkdirp",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "minimist"
+      ],
+      "effects": [
+        "mocha"
+      ],
+      "range": "0.4.1 - 0.5.1",
+      "nodes": [
+        "node_modules/mkdirp"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "mocha": {
+      "name": "mocha",
+      "severity": "critical",
+      "isDirect": true,
+      "via": [
+        "diff",
+        "glob",
+        "mkdirp"
+      ],
+      "effects": [],
+      "range": ">=0.14.0",
+      "nodes": [
+        "node_modules/mocha"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "12.0.3",
+        "isSemVerMajor": true
+      }
+    },
+    "mongodb": {
+      "name": "mongodb",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1086754,
+          "name": "mongodb",
+          "dependency": "mongodb",
+          "title": "Denial of Service in mongodb",
+          "url": "https://github.com/advisories/GHSA-mh5c-679w-hh4r",
+          "severity": "high",
+          "cwe": [],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<3.1.13"
+        },
+        "mongodb-core"
+      ],
+      "effects": [
+        "mongoose"
+      ],
+      "range": "<=3.1.12",
+      "nodes": [
+        "node_modules/mongodb"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "mongodb-core": {
+      "name": "mongodb-core",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "bson"
+      ],
+      "effects": [
+        "mongodb"
+      ],
+      "range": "<=3.1.1",
+      "nodes": [
+        "node_modules/mongodb-core"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "mongoose": {
+      "name": "mongoose",
+      "severity": "critical",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1095078,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "automattic/mongoose vulnerable to Prototype pollution via Schema.path",
+          "url": "https://github.com/advisories/GHSA-f825-f98c-gj3g",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:H"
+          },
+          "range": "<5.13.15"
+        },
+        {
+          "source": 1095080,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose Prototype Pollution vulnerability",
+          "url": "https://github.com/advisories/GHSA-9m93-w8w6-76hh",
+          "severity": "critical",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 10,
+            "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:H"
+          },
+          "range": "<5.13.20"
+        },
+        {
+          "source": 1097158,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose Vulnerable to Prototype Pollution in Schema Object",
+          "url": "https://github.com/advisories/GHSA-h8hf-x3f4-xwgp",
+          "severity": "critical",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<5.13.15"
+        },
+        {
+          "source": 1112939,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose search injection vulnerability",
+          "url": "https://github.com/advisories/GHSA-m7xq-9374-9rvx",
+          "severity": "high",
+          "cwe": [
+            "CWE-89"
+          ],
+          "cvss": {
+            "score": 9.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=3.6.0-rc0 <5.13.23"
+        },
+        {
+          "source": 1117404,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose search injection vulnerability",
+          "url": "https://github.com/advisories/GHSA-vg7j-7cwx-8wgw",
+          "severity": "critical",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H"
+          },
+          "range": "<6.13.6"
+        },
+        {
+          "source": 1118999,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose's Improper Sanitization of $nor in sanitizeFilter May Allow NoSQL Injection",
+          "url": "https://github.com/advisories/GHSA-wpg9-53fq-2r8h",
+          "severity": "high",
+          "cwe": [
+            "CWE-74"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<6.13.9"
+        },
+        {
+          "source": 1139506,
+          "name": "mongoose",
+          "dependency": "mongoose",
+          "title": "Mongoose: Prototype pollution in mongoose update casting via __proto__-prefixed dotted path (Schema._getSchema/path getter)",
+          "url": "https://github.com/advisories/GHSA-664h-wqgq-64gw",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": "<6.13.10"
+        },
+        "async",
+        "bson",
+        "mongodb",
+        "mpath",
+        "mquery"
+      ],
+      "effects": [],
+      "range": "<=6.13.9",
+      "nodes": [
+        "node_modules/mongoose"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "mpath": {
+      "name": "mpath",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1095075,
+          "name": "mpath",
+          "dependency": "mpath",
+          "title": "Type confusion in mpath",
+          "url": "https://github.com/advisories/GHSA-p92x-r36w-9395",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-843"
+          ],
+          "cvss": {
+            "score": 5.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<0.8.4"
+        }
+      ],
+      "effects": [
+        "mongoose"
+      ],
+      "range": "<0.8.4",
+      "nodes": [
+        "node_modules/mpath"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    },
+    "mquery": {
+      "name": "mquery",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1086439,
+          "name": "mquery",
+          "dependency": "mquery",
+          "title": "Code Injection in mquery",
+          "url": "https://github.com/advisories/GHSA-45q2-34rf-mr94",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<3.2.3"
+        }
+      ],
+      "effects": [
+        "mongoose"
+      ],
+      "range": "<3.2.3",
+      "nodes": [
+        "node_modules/mquery"
+      ],
+      "fixAvailable": {
+        "name": "mongoose",
+        "version": "9.11.4",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 4,
+      "high": 2,
+      "critical": 7,
+      "total": 14
+    },
+    "dependencies": {
+      "prod": 112,
+      "dev": 22,
+      "optional": 0,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 133
+    }
+  }
+}

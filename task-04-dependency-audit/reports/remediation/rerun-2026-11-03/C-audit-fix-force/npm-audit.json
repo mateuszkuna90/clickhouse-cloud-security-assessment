@@ -1,0 +1,114 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "glob": {
+      "name": "glob",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244013,
+          "name": "glob",
+          "dependency": "glob",
+          "title": "Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal",
+          "url": "https://github.com/advisories/GHSA-3g3m-2fjr-6pw4",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=9.0.0 <=14.0.1"
+        },
+        "minimatch"
+      ],
+      "effects": [
+        "mocha"
+      ],
+      "range": "3.0.0 - 14.0.1",
+      "nodes": [
+        "node_modules/glob"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "11.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244012,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-405"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<11.0.1"
+        }
+      ],
+      "effects": [
+        "glob",
+        "mocha"
+      ],
+      "range": "<11.0.1",
+      "nodes": [
+        "node_modules/minimatch"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "11.0.0",
+        "isSemVerMajor": true
+      }
+    },
+    "mocha": {
+      "name": "mocha",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "glob",
+        "minimatch"
+      ],
+      "effects": [],
+      "range": ">=5.1.0",
+      "nodes": [
+        "node_modules/mocha"
+      ],
+      "fixAvailable": {
+        "name": "mocha",
+        "version": "11.0.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 0,
+      "critical": 0,
+      "total": 3
+    },
+    "dependencies": {
+      "prod": 104,
+      "dev": 25,
+      "optional": 0,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 128
+    }
+  }
+}

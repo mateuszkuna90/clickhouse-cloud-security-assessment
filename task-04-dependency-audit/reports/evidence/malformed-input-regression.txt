@@ -1,0 +1,27 @@
+Malformed-input regression: previous script vs current script, each run with --fail-on high
+Run (UTC): 2026-11-03T16:08:54Z, Python 3.11.2
+Previous = functionally identical recreation of the version Codex reviewed (help text trimmed).
+Columns: fixture | previous exit / summary status | current exit / summary status
+
+example-advisory-missing-url.json            | exit 1 / ok                        | exit 2 / input_error
+example-advisory-severity-array.json         | exit 1 / no-summary+TRACEBACK(TypeError) | exit 2 / input_error
+example-effects-not-reciprocal.json          | exit 1 / ok                        | exit 2 / input_error
+example-fix-available-malformed.json         | exit 1 / ok                        | exit 2 / input_error
+example-metadata-count-mismatch.json         | exit 1 / ok                        | exit 2 / input_error
+example-metadata-missing.json                | exit 1 / ok                        | exit 2 / input_error
+example-metadata-total-mismatch.json         | exit 1 / ok                        | exit 2 / input_error
+example-missing-fields.json                  | exit 1 / ok                        | exit 2 / input_error
+example-missing-severity.json                | exit 1 / ok                        | exit 2 / input_error
+example-name-mismatch.json                   | exit 1 / ok                        | exit 2 / input_error
+example-nested-entry-not-object.json         | exit 1 / ok                        | exit 2 / input_error
+example-npm6-format.json                     | exit 1 / ok                        | exit 2 / input_error
+example-report-version-float.json            | exit 1 / ok                        | exit 2 / input_error
+example-severity-array.json                  | exit 1 / no-summary+TRACEBACK(TypeError) | exit 2 / input_error
+example-severity-below-own-advisory.json     | exit 1 / ok                        | exit 2 / input_error
+example-severity-object.json                 | exit 1 / no-summary+TRACEBACK(TypeError) | exit 2 / input_error
+example-severity-unknown-value.json          | exit 1 / ok                        | exit 2 / input_error
+example-via-item-not-object.json             | exit 1 / ok                        | exit 2 / input_error
+example-via-unknown-package.json             | exit 1 / ok                        | exit 2 / input_error
+example-vulnerabilities-not-object.json      | exit 2 / input_error               | exit 2 / input_error
+example-only-high-missing-severity.json      | exit 0 / ok                        | exit 2 / input_error
+example-only-high-not-object.json            | exit 0 / ok                        | exit 2 / input_error

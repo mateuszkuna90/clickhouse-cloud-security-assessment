@@ -1,0 +1,12 @@
+started (UTC): 2026-11-03T16:04:52Z
+node: v26.13.0
+npm: 11.20.0
+registry: https://registry.npmjs.org/
+os: MINGW64_NT-10.0-26200 3.6.6-1cdd4371.x86_64
+baseline sha256 (app/):
+  cfd9746d828c8798c7656171dfbe62b56120a67163e43da115909f9b2dc46c3d *package.json
+  7c40b1545681450fd3ea83424b74b2c845be593bc1ff356f0e649570ef9c42db *package-lock.json
+  f6ec945edf505332c5cb901b66fe495417c436009550c812fa294777fb822c83 *.npmrc
+finished (UTC): 2026-11-03T16:05:20Z
+baseline app/ unchanged: yes
+app/node_modules present: no

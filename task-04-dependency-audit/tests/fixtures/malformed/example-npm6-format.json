@@ -1,0 +1,23 @@
+{
+  "actions": [
+    {"action": "install", "module": "example-lib", "target": "2.0.0", "isMajor": true,
+     "resolves": [{"id": 101, "path": "example-lib", "dev": false, "optional": false, "bundled": false}]},
+    {"action": "update", "module": "example-deep", "target": "1.0.5", "depth": 2,
+     "resolves": [{"id": 102, "path": "example-lib>example-deep", "dev": false, "optional": false, "bundled": false}]},
+    {"action": "review", "module": "example-deep", "resolves": [{"id": 103, "path": "example-lib>example-deep"}]}
+  ],
+  "advisories": {
+    "101": {"id": 101, "module_name": "example-lib", "severity": "high", "title": "Example injection",
+            "url": "https://github.com/advisories/GHSA-2345-6789-cfgh", "vulnerable_versions": "<2.0.0",
+            "patched_versions": ">=2.0.0", "cwe": "CWE-94",
+            "findings": [{"version": "1.0.0", "paths": ["example-lib"]}]},
+    "102": {"id": 102, "module_name": "example-deep", "severity": "moderate", "title": "Example DoS",
+            "url": "https://npmjs.com/advisories/102", "vulnerable_versions": "<1.0.5",
+            "findings": [{"version": "1.0.0", "paths": ["example-lib>example-deep"]}]},
+    "103": {"id": 103, "module_name": "example-deep", "severity": "critical", "title": "Example RCE",
+            "url": "https://npmjs.com/advisories/103", "vulnerable_versions": "<=1.0.5",
+            "findings": [{"version": "1.0.0", "paths": ["example-lib>example-deep"]}]},
+    "104": {"id": 104, "severity": "low", "title": "Missing module name"}
+  },
+  "metadata": {"vulnerabilities": {"info": 0, "low": 0, "moderate": 1, "high": 1, "critical": 1}}
+}
