@@ -548,6 +548,8 @@ Mutation tests:
 - **checkov does not detect `DB_PASSWORD`** in the fixture. That fake value
   is covered by `tests/dockerfile-assertions.sh` (secret-like `ENV`) and
   `tests/known-fake-secrets.sh`.
-- **Root `.gitignore` gap.** The repository-root `.gitignore` does not ignore
-  `*.env` files such as `runtime.env`. Task 2's own `.gitignore` covers this
-  task only; the root file was left unchanged so that changes stay inside Task 2.
+- **`.gitignore` is a name-based safety net.** The repository-root
+  `.gitignore` now also ignores `*.env` and `*.env.*` (for example
+  `runtime.env`) everywhere, and Task 2's own `.gitignore` keeps the same rule
+  locally. Neither inspects file content; a secret in a differently named file
+  is only caught by a content scanner.

@@ -1,0 +1,52 @@
+# Line endings: store and check out text files with LF on every platform.
+#
+# Why: with core.autocrlf=true (the Git for Windows default) LF files are
+# checked out as CRLF. That breaks byte-exact checks in this repository:
+#   - Task 3 CLI golden-file comparison and gofmt
+#   - Task 4 evidence hashes (sha256.txt, run-info.txt), which were recorded
+#     over the committed LF bytes
+#   - shell scripts executed by bash
+#
+# eol=lf in .gitattributes overrides core.autocrlf, so a checkout gives the
+# same bytes as the repository on Windows, macOS and Linux.
+# task-01-gcp-terraform/.gitattributes keeps its own (compatible) LF rules.
+
+# Default: auto-detect text, always LF in the working tree.
+* text=auto eol=lf
+
+# Explicit text types used in this repository.
+*.go          text eol=lf
+go.mod        text eol=lf
+go.sum        text eol=lf
+*.sh          text eol=lf
+*.py          text eol=lf
+*.tf          text eol=lf
+*.hcl         text eol=lf
+*.json        text eol=lf
+*.csv         text eol=lf
+*.tsv         text eol=lf
+*.txt         text eol=lf
+*.md          text eol=lf
+*.yaml        text eol=lf
+*.yml         text eol=lf
+*.example     text eol=lf
+*.npmrc       text eol=lf
+.npmrc        text eol=lf
+Dockerfile    text eol=lf
+*.Dockerfile  text eol=lf
+*.dockerignore text eol=lf
+.gitignore    text eol=lf
+.gitattributes text eol=lf
+
+# Lockfiles: must hash and diff byte-for-byte as committed.
+package-lock.json   text eol=lf
+.terraform.lock.hcl text eol=lf
+
+# Binary files: never convert.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary

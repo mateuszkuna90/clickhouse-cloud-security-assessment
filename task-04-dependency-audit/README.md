@@ -611,10 +611,11 @@ difference because GHSA-f23m-r3pf-42rh was updated (§9).
 
 To repeat all remediation scenarios (A–D plus a baseline re-audit) with full
 evidence, run from `task-04-dependency-audit/` in Git Bash or any POSIX
-shell:
+shell. The script is invoked through `bash` explicitly because Git does not
+track it as executable:
 
 ```sh
-scripts/run-remediation-scenarios.sh reports/remediation/rerun-$(date -u +%Y-%m-%d-%H%M)
+bash scripts/run-remediation-scenarios.sh reports/remediation/rerun-$(date -u +%Y-%m-%d-%H%M)
 ```
 
 The script refuses to write into an existing directory (exit 2), so earlier

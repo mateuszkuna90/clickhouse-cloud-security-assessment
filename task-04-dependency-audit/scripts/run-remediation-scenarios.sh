@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Re-run the remediation scenarios in throwaway copies of app/ and keep the evidence.
 #
-#   scripts/run-remediation-scenarios.sh <new-evidence-dir>
+#   bash scripts/run-remediation-scenarios.sh <new-evidence-dir>
 #
 # Safety:
 #   * app/ is only read. Every scenario runs in a temp directory outside the repo.
