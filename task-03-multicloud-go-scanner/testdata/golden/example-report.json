@@ -1,0 +1,201 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "cloudfw-scan",
+    "version": "0.1.0-test"
+  },
+  "scan": {
+    "providers": {
+      "aws": "complete",
+      "gcp": "partial",
+      "azure": "complete"
+    },
+    "scopes": [
+      {
+        "provider": "aws",
+        "scope": "111111111111/eu-west-1",
+        "status": "complete",
+        "resources_scanned": 1,
+        "rules_evaluated": 3,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      },
+      {
+        "provider": "azure",
+        "scope": "00000000-0000-0000-0000-000000000000",
+        "status": "complete",
+        "resources_scanned": 1,
+        "rules_evaluated": 1,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": "Enabled"
+      },
+      {
+        "provider": "gcp",
+        "scope": "example-project-a",
+        "status": "incomplete",
+        "resources_scanned": 2,
+        "rules_evaluated": 2,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      },
+      {
+        "provider": "gcp",
+        "scope": "example-project-b",
+        "status": "failed",
+        "resources_scanned": 0,
+        "rules_evaluated": 0,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      }
+    ],
+    "findings": 4
+  },
+  "aws": {
+    "security_groups": [
+      {
+        "id": "sg-0fake0000000000001",
+        "name": "open-sg",
+        "vpc_id": "vpc-0fake000000000001",
+        "account_id": "111111111111",
+        "region": "eu-west-1",
+        "insecure_rules": [
+          {
+            "protocol": "icmp",
+            "port": "all",
+            "from_port": null,
+            "to_port": null,
+            "icmp_type": 8,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "icmp",
+            "provider_port": "8:-1",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "icmp:8:-1:0.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "tcp",
+            "port": "8080",
+            "from_port": 8080,
+            "to_port": 8080,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "tcp",
+            "provider_port": "8080-8080",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "tcp:8080:8080:0.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "gcp": {
+    "firewall_rules": [
+      {
+        "name": "allow-all",
+        "network": "default",
+        "project": "example-project-a",
+        "id": "1234567890",
+        "direction": "INGRESS",
+        "insecure_rules": [
+          {
+            "protocol": "icmp",
+            "port": "all",
+            "from_port": null,
+            "to_port": null,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "icmp",
+            "provider_port": "",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "allow-all",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": 1000,
+              "targets": [
+                "all_instances"
+              ],
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "azure": {
+    "nsgs": [
+      {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/networkSecurityGroups/open-nsg",
+        "name": "open-nsg",
+        "subscription_id": "00000000-0000-0000-0000-000000000000",
+        "insecure_rules": [
+          {
+            "protocol": "all",
+            "port": "all",
+            "from_port": null,
+            "to_port": null,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "*",
+            "provider_port": "*",
+            "provider_source": "*",
+            "rule_ref": "allow-any",
+            "match_reason": "azure_any_wildcard",
+            "description": "<fake> & description",
+            "context": {
+              "priority": 100,
+              "targets": null,
+              "attached": true
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "provider": "gcp",
+      "scope": "example-project-a",
+      "resource_id": "projects/example-project-a/global/firewalls/fake-rule",
+      "rule_ref": "fake-rule",
+      "code": "source_malformed",
+      "field": "sourceRanges",
+      "value": "not-a-cidr",
+      "effect": "scope_incomplete"
+    }
+  ],
+  "errors": [
+    {
+      "provider": "gcp",
+      "scope": "example-project-b",
+      "operation": "compute.firewalls.list",
+      "kind": "permission_denied",
+      "message": "fake 403"
+    }
+  ]
+}

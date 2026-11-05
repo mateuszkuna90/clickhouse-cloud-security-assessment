@@ -1,0 +1,8 @@
+node v26.13.0
+npm 11.20.0
+Python 3.11.2
+npm registry https://registry.npmjs.org/
+baseline audit run (UTC): 2026-11-03T15:19:38Z
+npm audit --json exit code: 1 (vulnerabilities found; stderr empty)
+npm audit --omit=dev --json exit code: 1 (vulnerabilities found; stderr empty)
+OS: Windows 11 Home 10.0.26200

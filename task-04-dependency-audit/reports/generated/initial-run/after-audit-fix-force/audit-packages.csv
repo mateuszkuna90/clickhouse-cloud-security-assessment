@@ -1,0 +1,4 @@
+package,severity,is_direct,installed_versions,vulnerable_range,nodes,advisory_count,advisory_ids,advisory_urls,advisory_titles,inherited_from,effects,fix_status,fix_package,fix_version,fix_is_semver_major
+glob,moderate,false,,3.0.0 - 14.0.1,node_modules/glob,1,GHSA-3g3m-2fjr-6pw4,https://github.com/advisories/GHSA-3g3m-2fjr-6pw4,Glob: AbortSignal cancellation bypass allows post-timeout filesystem traversal,minimatch,mocha,breaking,mocha,11.0.0,true
+minimatch,moderate,false,,<11.0.1,node_modules/minimatch,1,GHSA-g3hv-75wg-m249,https://github.com/advisories/GHSA-g3hv-75wg-m249,minimatch has potential denial of service via globparts amplification,,glob;mocha,breaking,mocha,11.0.0,true
+mocha,moderate,true,,>=5.1.0,node_modules/mocha,0,,,,glob;minimatch,,breaking,mocha,11.0.0,true

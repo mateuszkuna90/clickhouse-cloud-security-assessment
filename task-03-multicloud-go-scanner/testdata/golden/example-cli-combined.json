@@ -1,0 +1,302 @@
+{
+  "schema_version": "1.0",
+  "tool": {
+    "name": "cloudfw-scan",
+    "version": "0.1.0"
+  },
+  "scan": {
+    "providers": {
+      "aws": "complete",
+      "gcp": "complete",
+      "azure": "complete"
+    },
+    "scopes": [
+      {
+        "provider": "aws",
+        "scope": "111111111111/eu-west-1",
+        "status": "complete",
+        "resources_scanned": 2,
+        "rules_evaluated": 5,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      },
+      {
+        "provider": "azure",
+        "scope": "00000000-0000-0000-0000-00000000000a",
+        "status": "complete",
+        "resources_scanned": 2,
+        "rules_evaluated": 7,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      },
+      {
+        "provider": "gcp",
+        "scope": "example-project-a",
+        "status": "complete",
+        "resources_scanned": 3,
+        "rules_evaluated": 3,
+        "disabled_rules_skipped": 0,
+        "prefix_list_refs_unexpanded": 0,
+        "subscription_state": null
+      }
+    ],
+    "findings": 10
+  },
+  "aws": {
+    "security_groups": [
+      {
+        "id": "sg-0fake0000000000002",
+        "name": "open-web",
+        "vpc_id": "vpc-0fake000000000001",
+        "account_id": "111111111111",
+        "region": "eu-west-1",
+        "insecure_rules": [
+          {
+            "protocol": "icmp",
+            "port": "all",
+            "from_port": null,
+            "to_port": null,
+            "icmp_type": 8,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "icmp",
+            "provider_port": "8:-1",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "icmp:8:-1:0.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "tcp",
+            "port": "22",
+            "from_port": 22,
+            "to_port": 22,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "tcp",
+            "provider_port": "22-22",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "tcp:22:22:0.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "tcp",
+            "port": "8000-8090",
+            "from_port": 8000,
+            "to_port": 8090,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "tcp",
+            "provider_port": "8000-8090",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "tcp:8000:8090:0.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "udp",
+            "port": "53",
+            "from_port": 53,
+            "to_port": 53,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "udp",
+            "provider_port": "53-53",
+            "provider_source": "10.0.0.0/0",
+            "rule_ref": "udp:53:53:10.0.0.0/0",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": null,
+              "targets": null,
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "gcp": {
+    "firewall_rules": [
+      {
+        "name": "allow-ssh-world",
+        "network": "https://www.googleapis.com/compute/v1/projects/example-project-a/global/networks/default",
+        "project": "example-project-a",
+        "id": "1015",
+        "direction": "INGRESS",
+        "insecure_rules": [
+          {
+            "protocol": "tcp",
+            "port": "22",
+            "from_port": 22,
+            "to_port": 22,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "tcp",
+            "provider_port": "22",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "allow-ssh-world",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": 1000,
+              "targets": [
+                "all_instances"
+              ],
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "tcp",
+            "port": "3389",
+            "from_port": 3389,
+            "to_port": 3389,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "tcp",
+            "provider_port": "3389",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "allow-ssh-world",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": 1000,
+              "targets": [
+                "all_instances"
+              ],
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "udp",
+            "port": "500-600",
+            "from_port": 500,
+            "to_port": 600,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "udp",
+            "provider_port": "500-600",
+            "provider_source": "0.0.0.0/0",
+            "rule_ref": "allow-ssh-world",
+            "match_reason": "ipv4_world_cidr",
+            "description": "",
+            "context": {
+              "priority": 1000,
+              "targets": [
+                "all_instances"
+              ],
+              "attached": null
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "azure": {
+    "nsgs": [
+      {
+        "id": "/subscriptions/00000000-0000-0000-0000-00000000000a/resourceGroups/example-rg/providers/Microsoft.Network/networkSecurityGroups/web",
+        "name": "web",
+        "subscription_id": "00000000-0000-0000-0000-00000000000a",
+        "insecure_rules": [
+          {
+            "protocol": "all",
+            "port": "80",
+            "from_port": 80,
+            "to_port": 80,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "Internet",
+            "provider_protocol": "*",
+            "provider_port": "80",
+            "provider_source": "Internet",
+            "rule_ref": "securityRules/http-alt",
+            "match_reason": "azure_service_tag_internet",
+            "description": "",
+            "context": {
+              "priority": 110,
+              "targets": null,
+              "attached": false
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "all",
+            "port": "8080-8090",
+            "from_port": 8080,
+            "to_port": 8090,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "Internet",
+            "provider_protocol": "*",
+            "provider_port": "8080-8090",
+            "provider_source": "Internet",
+            "rule_ref": "securityRules/http-alt",
+            "match_reason": "azure_service_tag_internet",
+            "description": "",
+            "context": {
+              "priority": 110,
+              "targets": null,
+              "attached": false
+            },
+            "reachability": "not_evaluated"
+          },
+          {
+            "protocol": "tcp",
+            "port": "443",
+            "from_port": 443,
+            "to_port": 443,
+            "icmp_type": null,
+            "icmp_code": null,
+            "source": "0.0.0.0/0",
+            "provider_protocol": "Tcp",
+            "provider_port": "443",
+            "provider_source": "*",
+            "rule_ref": "securityRules/https",
+            "match_reason": "azure_any_wildcard",
+            "description": "",
+            "context": {
+              "priority": 100,
+              "targets": null,
+              "attached": false
+            },
+            "reachability": "not_evaluated"
+          }
+        ]
+      }
+    ]
+  },
+  "diagnostics": [],
+  "errors": []
+}

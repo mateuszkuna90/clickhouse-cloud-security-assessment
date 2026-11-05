@@ -1,0 +1,560 @@
+
+up to date, audited 150 packages in 3s
+
+# npm audit report
+
+async  2.0.0 - 2.6.3
+Severity: high
+Prototype Pollution in async - https://github.com/advisories/GHSA-fwr7-v2mv-hh25
+fix available via `npm audit fix --force`
+Will install mongoose@9.11.4, which is a breaking change
+node_modules/async
+  mongoose  <=6.13.9
+  Depends on vulnerable versions of async
+  Depends on vulnerable versions of bson
+  Depends on vulnerable versions of mongodb
+  Depends on vulnerable versions of mpath
+  Depends on vulnerable versions of mquery
+  node_modules/mongoose
+
+bson  <=1.1.3
+Severity: critical
+Deserialization of Untrusted Data in bson - https://github.com/advisories/GHSA-4jwp-vfvf-657p
+Deserialization of Untrusted Data in bson - https://github.com/advisories/GHSA-v8w9-2789-6hhr
+fix available via `npm audit fix --force`
+Will install mongoose@9.11.4, which is a breaking change
+node_modules/bson
+  mongodb-core  <=3.1.1
+  Depends on vulnerable versions of bson
+  node_modules/mongodb-core
+    mongodb  <=3.1.12
+    Depends on vulnerable versions of mongodb-core
+    node_modules/mongodb
+
+cookie  <0.7.0
+cookie accepts cookie name, path, and domain with out of bounds characters - https://github.com/advisories/GHSA-pxg6-pf52-xh8x
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/cookie
+  express  <=4.21.0 || 5.0.0-alpha.1 - 5.0.0
+  Depends on vulnerable versions of cookie
+  Depends on vulnerable versions of debug
+  Depends on vulnerable versions of fresh
+  Depends on vulnerable versions of path-to-regexp
+  Depends on vulnerable versions of proxy-addr
+  Depends on vulnerable versions of qs
+  Depends on vulnerable versions of send
+  Depends on vulnerable versions of serve-static
+  node_modules/express
+
+debug  <=2.6.8
+Severity: high
+debug Inefficient Regular Expression Complexity vulnerability - https://github.com/advisories/GHSA-9vvw-cc9w-f27h
+Regular Expression Denial of Service in debug - https://github.com/advisories/GHSA-gxpj-cx7g-858c
+Depends on vulnerable versions of ms
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/express/node_modules/debug
+node_modules/send/node_modules/debug
+  send  <=0.18.0
+  Depends on vulnerable versions of debug
+  Depends on vulnerable versions of fresh
+  Depends on vulnerable versions of mime
+  Depends on vulnerable versions of ms
+  node_modules/send
+    serve-static  <=1.16.0
+    Depends on vulnerable versions of send
+    node_modules/serve-static
+
+diff  <3.5.1
+jsdiff has a Denial of Service vulnerability in parsePatch and applyPatch - https://github.com/advisories/GHSA-73rr-hh4g-fpgx
+fix available via `npm audit fix --force`
+Will install mocha@12.0.3, which is a breaking change
+node_modules/diff
+  mocha  >=0.14.0
+  Depends on vulnerable versions of diff
+  Depends on vulnerable versions of glob
+  Depends on vulnerable versions of mkdirp
+  node_modules/mocha
+
+
+fresh  <0.5.2
+Severity: high
+Regular Expression Denial of Service in fresh - https://github.com/advisories/GHSA-9qj9-36jm-prpv
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/fresh
+
+jsonwebtoken  <=8.5.1
+Severity: high
+jsonwebtoken unrestricted key type could lead to legacy keys usage  - https://github.com/advisories/GHSA-8cf7-32gw-wr33
+jsonwebtoken's insecure implementation of key retrieval function could lead to Forgeable Public/Private Tokens from RSA to HMAC - https://github.com/advisories/GHSA-hjrf-2m68-5959
+jsonwebtoken vulnerable to signature validation bypass due to insecure default algorithm in jwt.verify() - https://github.com/advisories/GHSA-qwph-4952-7xr6
+fix available via `npm audit fix --force`
+Will install jsonwebtoken@9.0.3, which is a breaking change
+node_modules/jsonwebtoken
+
+lodash  <=4.17.23
+Severity: critical
+Command Injection in lodash - https://github.com/advisories/GHSA-35jh-r3h4-6jhm
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-4xc9-xhrj-v574
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-jf85-cpcp-j695
+Prototype Pollution in lodash - https://github.com/advisories/GHSA-p6mc-m468-83gw
+Regular Expression Denial of Service (ReDoS) in lodash - https://github.com/advisories/GHSA-29mw-wpgm-hmr9
+Regular Expression Denial of Service (ReDoS) in lodash - https://github.com/advisories/GHSA-x5rq-j2xg-h7qm
+lodash vulnerable to Code Injection via `_.template` imports key names - https://github.com/advisories/GHSA-r5fr-rjxr-66jc
+lodash vulnerable to Prototype Pollution via array path bypass in `_.unset` and `_.omit` - https://github.com/advisories/GHSA-f23m-r3pf-42rh
+Lodash has Prototype Pollution Vulnerability in `_.unset` and `_.omit` functions - https://github.com/advisories/GHSA-xxjr-mmjv-4gpg
+fix available via `npm audit fix --force`
+Will install lodash@4.18.1, which is outside the stated dependency range
+node_modules/lodash
+
+mime  <1.4.1
+Severity: high
+mime Regular Expression Denial of Service when MIME lookup performed on untrusted user input - https://github.com/advisories/GHSA-wrvr-8mpx-r7pp
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/mime
+
+minimatch  <11.0.1
+Severity: moderate
+minimatch has potential denial of service via globparts amplification - https://github.com/advisories/GHSA-g3hv-75wg-m249
+fix available via `npm audit fix --force`
+Will install mocha@12.0.3, which is a breaking change
+node_modules/minimatch
+  glob  3.0.0 - 13.0.6
+  Depends on vulnerable versions of minimatch
+  node_modules/glob
+
+minimist  <=0.2.3
+Severity: critical
+Prototype Pollution in minimist - https://github.com/advisories/GHSA-vh95-rmgr-6w4m
+Prototype Pollution in minimist - https://github.com/advisories/GHSA-xvch-5gv4-984h
+fix available via `npm audit fix --force`
+Will install mocha@12.0.3, which is a breaking change
+node_modules/minimist
+  mkdirp  0.4.1 - 0.5.1
+  Depends on vulnerable versions of minimist
+  node_modules/mkdirp
+
+
+
+mpath  <0.8.4
+Severity: moderate
+Type confusion in mpath - https://github.com/advisories/GHSA-p92x-r36w-9395
+fix available via `npm audit fix --force`
+Will install mongoose@9.11.4, which is a breaking change
+node_modules/mpath
+
+mquery  <3.2.3
+Severity: moderate
+Code Injection in mquery - https://github.com/advisories/GHSA-45q2-34rf-mr94
+fix available via `npm audit fix --force`
+Will install mongoose@9.11.4, which is a breaking change
+node_modules/mquery
+
+ms  <2.0.0
+Severity: moderate
+Vercel ms Inefficient Regular Expression Complexity vulnerability - https://github.com/advisories/GHSA-w9mr-4mfr-499f
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/express/node_modules/ms
+node_modules/send/node_modules/ms
+
+path-to-regexp  <=0.1.12
+Severity: high
+path-to-regexp outputs backtracking regular expressions - https://github.com/advisories/GHSA-9wv6-86v2-598j
+path-to-regexp contains a ReDoS - https://github.com/advisories/GHSA-rhx6-c78j-4q9w
+path-to-regexp vulnerable to Regular Expression Denial of Service via multiple route parameters - https://github.com/advisories/GHSA-37ch-88jc-xwx2
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/path-to-regexp
+
+proxy-addr  1.1.0 - 2.0.7
+Severity: critical
+proxy-addr vulnerable to IP spoofing via IPv4-mapped IPv6 trust subnet - https://github.com/advisories/GHSA-jqcg-44mw-7w3h
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/proxy-addr
+
+qs  <=6.15.4
+Severity: high
+Prototype Pollution Protection Bypass in qs - https://github.com/advisories/GHSA-gqgv-6jq5-jjj9
+qs vulnerable to Prototype Pollution - https://github.com/advisories/GHSA-hrpp-h998-j3pp
+qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion - https://github.com/advisories/GHSA-6rw7-vpxm-498p
+qs: Denial of Service via Attacker Controlled isBuffer - https://github.com/advisories/GHSA-4mjr-xmp4-gh2g
+fix available via `npm audit fix --force`
+Will install express@4.22.3, which is outside the stated dependency range
+node_modules/express/node_modules/qs
+
+
+
+26 vulnerabilities (3 low, 5 moderate, 8 high, 10 critical)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+vulnerable-node-app@1.0.0 <work>\A-audit-fix
++-- body-parser@1.20.9
+| +-- bytes@3.1.2
+| +-- content-type@1.0.5
+| +-- debug@2.6.9
+| | `-- ms@2.0.0 deduped
+| +-- depd@2.0.0
+| +-- destroy@1.2.0
+| +-- http-errors@2.0.1
+| | +-- depd@2.0.0 deduped
+| | +-- inherits@2.0.4
+| | +-- setprototypeof@1.2.0
+| | +-- statuses@2.0.2
+| | `-- toidentifier@1.0.1
+| +-- iconv-lite@0.4.24
+| | `-- safer-buffer@2.1.2
+| +-- on-finished@2.4.2
+| | `-- ee-first@1.1.1
+| +-- qs@6.16.2
+| | +-- es-define-property@1.0.1
+| | `-- side-channel@1.1.1
+| |   +-- es-errors@1.3.0
+| |   +-- object-inspect@1.13.4
+| |   +-- side-channel-list@1.0.1
+| |   | +-- es-errors@1.3.0 deduped
+| |   | `-- object-inspect@1.13.4 deduped
+| |   +-- side-channel-map@1.0.1
+| |   | +-- call-bound@1.0.4
+| |   | | +-- call-bind-apply-helpers@1.0.2
+| |   | | | +-- es-errors@1.3.0 deduped
+| |   | | | `-- function-bind@1.1.2 deduped
+| |   | | `-- get-intrinsic@1.3.0 deduped
+| |   | +-- es-errors@1.3.0 deduped
+| |   | +-- get-intrinsic@1.3.0
+| |   | | +-- call-bind-apply-helpers@1.0.2 deduped
+| |   | | +-- es-define-property@1.0.1 deduped
+| |   | | +-- es-errors@1.3.0 deduped
+| |   | | +-- es-object-atoms@1.1.2
+| |   | | | `-- es-errors@1.3.0 deduped
+| |   | | +-- function-bind@1.1.2
+| |   | | +-- get-proto@1.0.1
+| |   | | | +-- dunder-proto@1.0.1
+| |   | | | | +-- call-bind-apply-helpers@1.0.2 deduped
+| |   | | | | +-- es-errors@1.3.0 deduped
+| |   | | | | `-- gopd@1.2.0 deduped
+| |   | | | `-- es-object-atoms@1.1.2 deduped
+| |   | | +-- gopd@1.2.0
+| |   | | +-- has-symbols@1.1.0
+| |   | | +-- hasown@2.0.4
+| |   | | | `-- function-bind@1.1.2 deduped
+| |   | | `-- math-intrinsics@1.1.0
+| |   | `-- object-inspect@1.13.4 deduped
+| |   `-- side-channel-weakmap@1.0.2
+| |     +-- call-bound@1.0.4 deduped
+| |     +-- es-errors@1.3.0 deduped
+| |     +-- get-intrinsic@1.3.0 deduped
+| |     +-- object-inspect@1.13.4 deduped
+| |     `-- side-channel-map@1.0.1 deduped
+| +-- raw-body@2.5.3
+| | +-- bytes@3.1.2 deduped
+| | +-- http-errors@2.0.1 deduped
+| | +-- iconv-lite@0.4.24 deduped
+| | `-- unpipe@1.0.0 deduped
+| +-- type-is@1.6.18
+| | +-- media-typer@0.3.0
+| | `-- mime-types@2.1.35
+| |   `-- mime-db@1.52.0
+| `-- unpipe@1.0.0
++-- dotenv@8.6.0
++-- express@4.15.0
+| +-- accepts@1.3.8
+| | +-- mime-types@2.1.35 deduped
+| | `-- negotiator@0.6.3
+| +-- array-flatten@1.1.1
+| +-- content-disposition@0.5.2
+| +-- content-type@1.0.5 deduped
+| +-- cookie-signature@1.0.6
+| +-- cookie@0.3.1
+| +-- debug@2.6.1
+| | `-- ms@0.7.2
+| +-- depd@1.1.2
+| +-- encodeurl@1.0.2
+| +-- escape-html@1.0.3
+| +-- etag@1.8.1
+| +-- finalhandler@1.0.6
+| | +-- debug@2.6.9 deduped
+| | +-- encodeurl@1.0.2 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- on-finished@2.3.0
+| | | `-- ee-first@1.1.1 deduped
+| | +-- parseurl@1.3.3 deduped
+| | +-- statuses@1.3.1 deduped
+| | `-- unpipe@1.0.0 deduped
+| +-- fresh@0.5.0
+| +-- merge-descriptors@1.0.1
+| +-- methods@1.1.2
+| +-- on-finished@2.3.0
+| | `-- ee-first@1.1.1 deduped
+| +-- parseurl@1.3.3
+| +-- path-to-regexp@0.1.7
+| +-- proxy-addr@1.1.5
+| | +-- forwarded@0.1.2
+| | `-- ipaddr.js@1.4.0
+| +-- qs@6.3.1
+| +-- range-parser@1.2.1
+| +-- send@0.15.0
+| | +-- debug@2.6.1
+| | | `-- ms@0.7.2 deduped
+| | +-- depd@1.1.2
+| | +-- destroy@1.0.4
+| | +-- encodeurl@1.0.2 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- etag@1.8.1 deduped
+| | +-- fresh@0.5.0 deduped
+| | +-- http-errors@1.6.3
+| | | +-- depd@1.1.2 deduped
+| | | +-- inherits@2.0.3
+| | | +-- setprototypeof@1.1.0
+| | | `-- statuses@1.5.0
+| | +-- mime@1.3.4
+| | +-- ms@0.7.2
+| | +-- on-finished@2.3.0
+| | | `-- ee-first@1.1.1 deduped
+| | +-- range-parser@1.2.1 deduped
+| | `-- statuses@1.3.1 deduped
+| +-- serve-static@1.12.0
+| | +-- encodeurl@1.0.2 deduped
+| | +-- escape-html@1.0.3 deduped
+| | +-- parseurl@1.3.3 deduped
+| | `-- send@0.15.0 deduped
+| +-- setprototypeof@1.0.3
+| +-- statuses@1.3.1
+| +-- type-is@1.6.18 deduped
+| +-- utils-merge@1.0.0
+| `-- vary@1.1.2
++-- jsonwebtoken@8.1.0
+| +-- jws@3.2.3
+| | +-- jwa@1.4.2
+| | | +-- buffer-equal-constant-time@1.0.1
+| | | +-- ecdsa-sig-formatter@1.0.11
+| | | | `-- safe-buffer@5.2.1 deduped
+| | | `-- safe-buffer@5.2.1 deduped
+| | `-- safe-buffer@5.2.1
+| +-- lodash.includes@4.3.0
+| +-- lodash.isboolean@3.0.3
+| +-- lodash.isinteger@4.0.4
+| +-- lodash.isnumber@3.0.3
+| +-- lodash.isplainobject@4.0.6
+| +-- lodash.isstring@4.0.1
+| +-- lodash.once@4.1.1
+| +-- ms@2.0.0
+| `-- xtend@4.0.2
++-- lodash@4.17.10
++-- mocha@5.0.5
+| +-- browser-stdout@1.3.1
+| +-- commander@2.11.0
+| +-- debug@3.1.0
+| | `-- ms@2.0.0 deduped
+| +-- diff@3.5.0
+| +-- escape-string-regexp@1.0.5
+| +-- glob@7.1.2
+| | +-- fs.realpath@1.0.0
+| | +-- inflight@1.0.6
+| | | +-- once@1.4.0 deduped
+| | | `-- wrappy@1.0.2
+| | +-- inherits@2.0.4 deduped
+| | +-- minimatch@3.1.5
+| | | `-- brace-expansion@1.1.21
+| | |   +-- balanced-match@1.0.2
+| | |   `-- concat-map@0.0.1
+| | +-- once@1.4.0
+| | | `-- wrappy@1.0.2 deduped
+| | `-- path-is-absolute@1.0.1
+| +-- growl@1.10.3
+| +-- he@1.1.1
+| +-- mkdirp@0.5.1
+| | `-- minimist@0.0.8
+| `-- supports-color@4.4.0
+|   `-- has-flag@2.0.0
+`-- mongoose@4.13.21
+  +-- async@2.6.0
+  | `-- lodash@4.17.10 deduped
+  +-- bson@1.0.9
+  +-- hooks-fixed@2.0.2
+  +-- kareem@1.5.0
+  +-- lodash.get@4.4.2
+  +-- mongodb@2.2.34
+  | +-- es6-promise@3.2.1
+  | +-- mongodb-core@2.1.18
+  | | +-- bson@1.0.9 deduped
+  | | `-- require_optional@1.0.1
+  | |   +-- resolve-from@2.0.0
+  | |   `-- semver@5.7.3
+  | `-- readable-stream@2.2.7
+  |   +-- buffer-shims@1.0.0
+  |   +-- core-util-is@1.0.3
+  |   +-- inherits@2.0.4 deduped
+  |   +-- isarray@1.0.0
+  |   +-- process-nextick-args@1.0.7
+  |   +-- string_decoder@1.0.3
+  |   | `-- safe-buffer@5.1.2
+  |   `-- util-deprecate@1.0.2
+  +-- mpath@0.5.1
+  +-- mpromise@0.5.5
+  +-- mquery@2.3.3
+  | +-- bluebird@3.5.0
+  | +-- debug@2.6.9 deduped
+  | +-- regexp-clone@0.0.1 deduped
+  | `-- sliced@0.0.5
+  +-- ms@2.0.0 deduped
+  +-- muri@1.3.0
+  +-- regexp-clone@0.0.1
+  `-- sliced@1.0.1
+
+add xtend 4.0.2
+add wrappy 1.0.2
+add vary 1.1.2
+add utils-merge 1.0.0
+add util-deprecate 1.0.2
+add unpipe 1.0.0
+add type-is 1.6.18
+add toidentifier 1.0.1
+add supports-color 4.4.0
+add string_decoder 1.0.3
+add safe-buffer 5.1.2
+add statuses 1.3.1
+add sliced 1.0.1
+add side-channel-weakmap 1.0.2
+add side-channel-map 1.0.1
+add side-channel-list 1.0.1
+add side-channel 1.1.1
+add setprototypeof 1.0.3
+add serve-static 1.12.0
+add send 0.15.0
+add setprototypeof 1.1.0
+add on-finished 2.3.0
+add ms 0.7.2
+add inherits 2.0.3
+add http-errors 1.6.3
+add statuses 1.5.0
+add destroy 1.0.4
+add depd 1.1.2
+add debug 2.6.1
+add semver 5.7.3
+add safer-buffer 2.1.2
+add safe-buffer 5.2.1
+add resolve-from 2.0.0
+add require_optional 1.0.1
+add regexp-clone 0.0.1
+add readable-stream 2.2.7
+add raw-body 2.5.3
+add range-parser 1.2.1
+add qs 6.16.2
+add proxy-addr 1.1.5
+add process-nextick-args 1.0.7
+add path-to-regexp 0.1.7
+add path-is-absolute 1.0.1
+add parseurl 1.3.3
+add once 1.4.0
+add on-finished 2.4.2
+add object-inspect 1.13.4
+add negotiator 0.6.3
+add muri 1.3.0
+add ms 2.0.0
+add mquery 2.3.3
+add sliced 0.0.5
+add mpromise 0.5.5
+add mpath 0.5.1
+add mongoose 4.13.21
+add mongodb-core 2.1.18
+add mongodb 2.2.34
+add mocha 5.0.5
+add debug 3.1.0
+add mkdirp 0.5.1
+add minimist 0.0.8
+add minimatch 3.1.5
+add mime-types 2.1.35
+add mime-db 1.52.0
+add mime 1.3.4
+add methods 1.1.2
+add merge-descriptors 1.0.1
+add media-typer 0.3.0
+add math-intrinsics 1.1.0
+add lodash.once 4.1.1
+add lodash.isstring 4.0.1
+add lodash.isplainobject 4.0.6
+add lodash.isnumber 3.0.3
+add lodash.isinteger 4.0.4
+add lodash.isboolean 3.0.3
+add lodash.includes 4.3.0
+add lodash.get 4.4.2
+add lodash 4.17.10
+add kareem 1.5.0
+add jws 3.2.3
+add jwa 1.4.2
+add jsonwebtoken 8.1.0
+add isarray 1.0.0
+add ipaddr.js 1.4.0
+add inherits 2.0.4
+add inflight 1.0.6
+add iconv-lite 0.4.24
+add http-errors 2.0.1
+add statuses 2.0.2
+add setprototypeof 1.2.0
+add hooks-fixed 2.0.2
+add he 1.1.1
+add hasown 2.0.4
+add has-symbols 1.1.0
+add has-flag 2.0.0
+add growl 1.10.3
+add gopd 1.2.0
+add glob 7.1.2
+add get-proto 1.0.1
+add get-intrinsic 1.3.0
+add function-bind 1.1.2
+add fs.realpath 1.0.0
+add fresh 0.5.0
+add forwarded 0.1.2
+add finalhandler 1.0.6
+add on-finished 2.3.0
+add express 4.15.0
+add qs 6.3.1
+add on-finished 2.3.0
+add ms 0.7.2
+add depd 1.1.2
+add debug 2.6.1
+add etag 1.8.1
+add escape-string-regexp 1.0.5
+add escape-html 1.0.3
+add es6-promise 3.2.1
+add es-object-atoms 1.1.2
+add es-errors 1.3.0
+add es-define-property 1.0.1
+add encodeurl 1.0.2
+add ee-first 1.1.1
+add ecdsa-sig-formatter 1.0.11
+add dunder-proto 1.0.1
+add dotenv 8.6.0
+add diff 3.5.0
+add destroy 1.2.0
+add depd 2.0.0
+add debug 2.6.9
+add core-util-is 1.0.3
+add cookie-signature 1.0.6
+add cookie 0.3.1
+add content-type 1.0.5
+add content-disposition 0.5.2
+add concat-map 0.0.1
+add commander 2.11.0
+add call-bound 1.0.4
+add call-bind-apply-helpers 1.0.2
+add bytes 3.1.2
+add buffer-shims 1.0.0
+add buffer-equal-constant-time 1.0.1
+add bson 1.0.9
+add browser-stdout 1.3.1
+add brace-expansion 1.1.21
+add body-parser 1.20.9
+add bluebird 3.5.0
+add balanced-match 1.0.2
+add async 2.6.0
+add array-flatten 1.1.1
+add accepts 1.3.8
+
+added 149 packages in 344ms

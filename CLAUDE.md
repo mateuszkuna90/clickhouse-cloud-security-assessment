@@ -7,15 +7,23 @@ Guidance for Claude Code working in this repository.
 This repository holds a technical assessment for a **Cloud Security Engineer**
 role at ClickHouse. It is split into four tasks, one directory each:
 
-| Directory                       | Topic                                   | Status      |
-|---------------------------------|-----------------------------------------|-------------|
-| `task-01-gcp-terraform`         | GCP infrastructure with Terraform       | placeholder |
-| `task-02-security-review`       | Written security review                 | placeholder |
-| `task-03-multicloud-go-scanner` | Multi-cloud security scanner in Go      | placeholder |
-| `task-04-dependency-audit`      | Dependency / supply-chain audit         | placeholder |
+| Directory                       | Topic                                   | Status                                    |
+|---------------------------------|-----------------------------------------|-------------------------------------------|
+| `task-01-gcp-terraform`         | GCP infrastructure with Terraform       | implemented; validated offline, not deployed |
+| `task-02-security-review`       | Written security review                 | implemented; validated offline, not deployed or built |
+| `task-03-multicloud-go-scanner` | Multi-cloud security scanner in Go      | implemented; tested offline with fakes, never run against a real cloud |
+| `task-04-dependency-audit`      | Dependency / supply-chain audit         | implemented; real `npm audit` evidence from 2026-11-03 |
 
-Copy each task's exact requirements from the assessment brief into its README
-before implementing it. Do not guess the requirements.
+All four tasks are implemented. Each task README states exactly what was run
+and what was not; keep those statements accurate when changing a task. The
+root [README.md](README.md) is the submission entry point.
+
+Each task README quotes the brief's exact requirements. Check changes against
+the brief, not memory. Do not guess the requirements.
+
+Line endings are fixed by the root `.gitattributes` (LF for all text). Task 3
+golden files and Task 4 evidence hashes depend on LF bytes; do not
+regenerate committed evidence to make a hash match.
 
 ## Your role: implementation engineer
 

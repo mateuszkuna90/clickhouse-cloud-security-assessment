@@ -66,8 +66,14 @@ tfplan
 *.tfvars.local
 
 # --- Local environment files (templates stay tracked) ----------------------
+# Covers .env, .env.local, runtime.env, prod.env, app.env.local, .envrc.
+# Sanitized templates (*.example, *.sample) are re-included by the
+# allow-list at the end of this file and by the two lines below.
 .env
 .env.*
+*.env
+*.env.*
+.envrc
 !.env.example
 !.env.sample
 
